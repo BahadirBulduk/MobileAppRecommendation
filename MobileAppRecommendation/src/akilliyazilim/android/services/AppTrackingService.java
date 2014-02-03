@@ -11,8 +11,11 @@ import android.os.IBinder;
 import android.util.Log;
 
 public class AppTrackingService extends Service {
+	/* counter sureyi sayan sayac */
 	int counter = 0;
+	/* en son uygulamanýn package adýný tutan degýsken */
 	String lastPackageName;
+	/* Calýsan uygulamalarýn listesinin tutuldugu List */
 	List<ActivityManager.RunningTaskInfo> taskInfo;
 	ActivityManager activityManager;
 	ComponentName componentInfo;
@@ -38,7 +41,7 @@ public class AppTrackingService extends Service {
 		// TODO Auto-generated method stub
 
 		taskInfo = activityManager.getRunningTasks(1);
-
+		/* Activity stackte en tepedeki activity alýnýr */
 		componentInfo = taskInfo.get(0).topActivity;
 		try {
 			/* Ayný Uygulama çalýþmaya devam ederken */
@@ -69,6 +72,7 @@ public class AppTrackingService extends Service {
 								+ Calendar.getInstance().get(
 										Calendar.HOUR_OF_DAY));
 			}
+			/* Bir önceki uygulamanýn package name elde et! */
 			lastPackageName = taskInfo.get(0).topActivity.getPackageName();
 
 		} catch (Exception e) {
