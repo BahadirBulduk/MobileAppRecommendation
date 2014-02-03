@@ -1,4 +1,6 @@
-package com.example.mobileapprecommendation;
+package akilliyazilim.android.mobileapprecommendation;
+
+import com.example.mobileapprecommendation.R;
 
 import android.os.Bundle;
 import android.app.Activity;
