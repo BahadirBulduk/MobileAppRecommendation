@@ -1,14 +1,12 @@
 package akilliyazilim.android.mobileapprecommendation;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
+import AppList.AppList;
 import akilliyazilim.android.Database.DatabaseHelper;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 
 import com.example.mobileapprecommendation.R;
@@ -17,13 +15,20 @@ public class MainActivity extends Activity {
 
 	public static DatabaseHelper database;
 	public static String androidId;
-    @Override
+    @SuppressLint("NewApi") @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
         androidId = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
         database = new DatabaseHelper(getApplicationContext(),androidId+".db");
+        
+        AppList a = new AppList(this);
+        
+        for(int i =0;i<a.packageList1.size();i++){
+        	Log.i(a.packageManager.getApplicationLabel(
+    				a.packageList1.get(i).applicationInfo).toString(),a.setDateFormat(a.packageList1.get(i).firstInstallTime));
+        }
     }
 
 
