@@ -32,6 +32,9 @@
                 <action android:name="Manual_Start" />
             </intent-filter>
         </receiver>
+        <service android:name="akilliyazilim.android.services.RecomendationService"></service>
+        <service android:name="akilliyazilim.android.services.TimerService"></service>
+        <receiver android:name="akilliyazilim.android.receiver.AlarmReceiver"></receiver>
     </application>
 
 </manifest>
