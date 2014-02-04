@@ -55,6 +55,7 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+        <service android:name="akilliyazilim.android.services.UploadService"></service>
     </application>
 
 </manifest>
