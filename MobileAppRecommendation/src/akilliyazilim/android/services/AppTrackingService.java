@@ -59,12 +59,12 @@ public class AppTrackingService extends Service {
 			/* Yený bir uygulama açýldýgýnda counter sýfýrlanýr */
 			else {
 				if (lastPackageName != null) {
-					/* Counter bu nokta da db ye kayýt edýlmeli */
-					
+//deneme 
 					/* Database'e yazýlacak androidId ve tarih alýndý */
 					String androidId = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
 					Date dt = new Date();
 					CharSequence s  = DateFormat.format("dd-mm-yyyy ", dt.getTime());
+					
 					/*Database'e yazma islemi gerceklestirildi*/
 					SQLiteDatabase db = database.getWritableDatabase();
 					ContentValues values = new ContentValues();
