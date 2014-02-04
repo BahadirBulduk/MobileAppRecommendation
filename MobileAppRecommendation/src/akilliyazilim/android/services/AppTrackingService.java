@@ -1,13 +1,20 @@
-package akilliyazilim.android.services;
+	package akilliyazilim.android.services;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import akilliyazilim.android.Database.DatabaseHelper;
+import akilliyazilim.android.mobileapprecommendation.MainActivity;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
+import android.provider.Settings;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 public class AppTrackingService extends Service {
@@ -19,7 +26,7 @@ public class AppTrackingService extends Service {
 	List<ActivityManager.RunningTaskInfo> taskInfo;
 	ActivityManager activityManager;
 	ComponentName componentInfo;
-
+	DatabaseHelper database;
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
@@ -31,6 +38,7 @@ public class AppTrackingService extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
+		database = MainActivity.database;
 		activityManager = (ActivityManager) this
 				.getSystemService(ACTIVITY_SERVICE);
 
@@ -58,7 +66,20 @@ public class AppTrackingService extends Service {
 			else {
 				if (lastPackageName != null) {
 					/* Counter bu nokta da db ye kayýt edýlmeli */
-
+					
+					String androidId = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
+					Date dt = new Date();
+					CharSequence s  = DateFormat.format("dd-mm-yyyy ", dt.getTime());
+				
+					SQLiteDatabase db = database.getWritableDatabase();
+					ContentValues values = new ContentValues();
+					values.put("TelId", androidId);//string
+					values.put("AppName", lastPackageName);//string
+					values.put("DurationOfUse", counter);//int
+					values.put("Date",s+"");//string
+					db.insertOrThrow("AppTracking", null, values);
+					db.close();
+					
 					Log.i("Running task", "Last:" + lastPackageName);
 
 				}
