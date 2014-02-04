@@ -2,6 +2,7 @@ package akilliyazilim.android.mobileapprecommendation;
 
 import AppList.AppList;
 import akilliyazilim.android.Database.DatabaseHelper;
+import akilliyazilim.android.services.AppTrackingService;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -26,9 +27,10 @@ public class MainActivity extends Activity {
         AppList a = new AppList(this);
         
         for(int i =0;i<a.packageList1.size();i++){
-        	Log.i(a.packageManager.getApplicationLabel(
-    				a.packageList1.get(i).applicationInfo).toString(),a.setDateFormat(a.packageList1.get(i).firstInstallTime));
+        	Log.i(
+    				a.packageList1.get(i).applicationInfo.packageName.toString(),a.setDateFormat(a.packageList1.get(i).firstInstallTime));
         }
+        
     }
 
 

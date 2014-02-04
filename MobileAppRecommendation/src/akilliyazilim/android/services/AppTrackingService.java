@@ -24,7 +24,7 @@ public class AppTrackingService extends Service {
 	String lastPackageName;
 	/* Calýsan uygulamalarýn listesinin tutuldugu List */
 	List<ActivityManager.RunningTaskInfo> taskInfo;
-	ActivityManager activityManager;
+	public static ActivityManager activityManager;
 	ComponentName componentInfo;
 	DatabaseHelper database;
 	@Override
@@ -79,7 +79,7 @@ public class AppTrackingService extends Service {
 			}
 			/* Bir önceki uygulamanýn package name elde et! */
 			lastPackageName = taskInfo.get(0).topActivity.getPackageName();
-
+			Log.i("denemeee",lastPackageName);
 		} catch (Exception e) {
 
 		}
