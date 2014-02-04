@@ -54,23 +54,18 @@ public class AppTrackingService extends Service {
 		try {
 			/* Ayný Uygulama çalýþmaya devam ederken */
 			if (componentInfo.getPackageName().equals(lastPackageName)) {
-
 				counter++;
-				Log.d("Running task", componentInfo.getPackageName() + "  "
-						+ componentInfo.getClassName() + " " + counter + " "
-						+ Calendar.getInstance().get(
-
-						Calendar.HOUR_OF_DAY));
 			}
 			/* Yený bir uygulama açýldýgýnda counter sýfýrlanýr */
 			else {
 				if (lastPackageName != null) {
 					/* Counter bu nokta da db ye kayýt edýlmeli */
 					
+					/* Database'e yazýlacak androidId ve tarih alýndý */
 					String androidId = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
 					Date dt = new Date();
 					CharSequence s  = DateFormat.format("dd-mm-yyyy ", dt.getTime());
-				
+					/*Database'e yazma islemi gerceklestirildi*/
 					SQLiteDatabase db = database.getWritableDatabase();
 					ContentValues values = new ContentValues();
 					values.put("TelId", androidId);//string
@@ -78,20 +73,9 @@ public class AppTrackingService extends Service {
 					values.put("DurationOfUse", counter);//int
 					values.put("Date",s+"");//string
 					db.insertOrThrow("AppTracking", null, values);
-					db.close();
-					
-					Log.i("Running task", "Last:" + lastPackageName);
-
+					db.close();				
 				}
-
 				counter = 0;
-				Log.d("Running task",
-						componentInfo.getPackageName()
-								+ "  "
-								+ counter
-								+ " "
-								+ Calendar.getInstance().get(
-										Calendar.HOUR_OF_DAY));
 			}
 			/* Bir önceki uygulamanýn package name elde et! */
 			lastPackageName = taskInfo.get(0).topActivity.getPackageName();
