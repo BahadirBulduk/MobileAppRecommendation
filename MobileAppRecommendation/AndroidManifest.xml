@@ -32,11 +32,29 @@
                 <action android:name="Manual_Start" />
             </intent-filter>
         </receiver>
-        <service android:name="akilliyazilim.android.services.RecomendationService"></service>
-        <service android:name="akilliyazilim.android.services.TimerService"></service>
-        <receiver android:name="akilliyazilim.android.receiver.AlarmReceiver"></receiver>
-        <activity android:name="akilliyazilim.android.mobileapprecommendation.DownloadPage"></activity>
-        <activity android:name="akilliyazilim.android.mobileapprecommendation.RecomendationPage"></activity>
+
+        <service android:name="akilliyazilim.android.services.RecomendationService" >
+        </service>
+        <service android:name="akilliyazilim.android.services.TimerService" >
+        </service>
+
+        <receiver android:name="akilliyazilim.android.receiver.AlarmReceiver" >
+        </receiver>
+
+        <activity android:name="akilliyazilim.android.mobileapprecommendation.DownloadPage" >
+        </activity>
+        <activity android:name="akilliyazilim.android.mobileapprecommendation.RecomendationPage" >
+        </activity>
+
+        <receiver android:name="akilliyazilim.android.receiver.CheckApp" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_INSTALL" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
