@@ -8,8 +8,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public static final int VERSION = 1;
 
-	
-	public DatabaseHelper(Context context,String db_name) {
+	public DatabaseHelper(Context context, String db_name) {
 		super(context, db_name, null, VERSION);
 		// TODO Auto-generated constructor stub
 	}
@@ -17,11 +16,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		db.execSQL("CREATE TABLE CallLog (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId INTEGER,NumberOfIncomingCall INTEGER,NumberOfOutgoingCall INTEGER"
+		db.execSQL("CREATE TABLE CallLog (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId STRING,NumberOfIncomingCall INTEGER,NumberOfOutgoingCall INTEGER"
 				+ ",TimeOfIncomingCall INTEGER,TimeOfOutgoingCall INTEGER,NumberOfDifferentCall INTEGER,NumberOfContact INTEGER,Date STRING);");
-		db.execSQL("CREATE TABLE AppList (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId INTEGER,AppName String,InstallDate STRING,DeletedDate STRING)");
-		db.execSQL("CREATE TABLE Recommendation (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId INTEGER,AppName String,InstallDate STRING,DeletedDate STRING)");
-		db.execSQL("CREATE TABLE AppTracking (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId INTEGER,AppName STRING,DurationOfUse Integer,Date STRING)");
+		db.execSQL("CREATE TABLE AppList (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId STRING,AppName String,InstallDate STRING,DeletedDate STRING)");
+		db.execSQL("CREATE TABLE Recommendation (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId STRING,AppName String,InstallDate STRING,DeletedDate STRING)");
+		db.execSQL("CREATE TABLE AppTracking (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId STRING,AppName STRING,DurationOfUse Integer,Date STRING)");
 	}
 
 	@Override
@@ -30,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXIST CallLog");
 		db.execSQL("DROP TABLE IF EXIST AppList");
 		db.execSQL("DROP TABLE IF EXIST Recommendation");
-		db.execSQL("DROP TABLE IF EXIST AppTracking");		
+		db.execSQL("DROP TABLE IF EXIST AppTracking");
 		onCreate(db);
 
 	}
