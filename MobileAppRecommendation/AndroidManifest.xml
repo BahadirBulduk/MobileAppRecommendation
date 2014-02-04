@@ -35,6 +35,8 @@
         <service android:name="akilliyazilim.android.services.RecomendationService"></service>
         <service android:name="akilliyazilim.android.services.TimerService"></service>
         <receiver android:name="akilliyazilim.android.receiver.AlarmReceiver"></receiver>
+        <activity android:name="akilliyazilim.android.mobileapprecommendation.DownloadPage"></activity>
+        <activity android:name="akilliyazilim.android.mobileapprecommendation.RecomendationPage"></activity>
     </application>
 
 </manifest>
