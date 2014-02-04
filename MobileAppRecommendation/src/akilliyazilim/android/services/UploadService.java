@@ -1,6 +1,7 @@
 package akilliyazilim.android.services;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,20 +18,20 @@ public class UploadService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-
-		if (intent.getExtras() != null) {
-			NetworkInfo ni = (NetworkInfo) intent.getExtras().get(
-					ConnectivityManager.EXTRA_NETWORK_INFO);
-			if (ni != null && ni.getState() == NetworkInfo.State.CONNECTED) {
-				// internet baglantýsý mevcut
-
-			} else if (intent.getBooleanExtra(
-					ConnectivityManager.EXTRA_NO_CONNECTIVITY, Boolean.FALSE)) {
-				// ýnternet baglantýsý yok
-			}
+		if (isNetworkAvailable()) {
+			// internet var
+		} else {
+			// internet yok.
 		}
 		return super.onStartCommand(intent, flags, startId);
 
+	}
+
+	private boolean isNetworkAvailable() {
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager
+				.getActiveNetworkInfo();
+		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 
 }
