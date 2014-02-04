@@ -25,6 +25,13 @@
 
         <service android:name="akilliyazilim.android.services.AppTrackingService" >
         </service>
+
+        <receiver android:name="akilliyazilim.android.receiver.StartupReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="Manual_Start" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
