@@ -2,6 +2,9 @@ package akilliyazilim.android.services;
 
 import java.util.Calendar;
 
+import akilliyazilim.android.receiver.AlarmReceiver;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -36,20 +39,19 @@ public class TimerService extends Service {
 		mCalendar.set(Calendar.SECOND, 00);
 		mCalendar.set(Calendar.AM_PM, Calendar.PM);
 
-		// Intent receiverIntent = new Intent(TimerService.this,
-		// AlarmReceiver.class);
-		//
-		// PendingIntent pendingIntent = PendingIntent.getBroadcast(
-		// TimerService.this, 0, receiverIntent, 0);
-		//
-		// AlarmManager alarmManager = (AlarmManager)
-		// getSystemService(ALARM_SERVICE);
-		// /*
-		// * Alarm Manager set et (tetiklenecek zaman ve intent parametre olarak
-		// * ekleniyor)!
-		// */
-		// alarmManager.set(AlarmManager.RTC, mCalendar.getTimeInMillis(),
-		// pendingIntent);
+		Intent receiverIntent = new Intent(TimerService.this,
+				AlarmReceiver.class);
+
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(
+				TimerService.this, 0, receiverIntent, 0);
+
+		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+		/*
+		 * Alarm Manager set et (tetiklenecek zaman ve intent parametre olarak
+		 * ekleniyor)!
+		 */
+		alarmManager.set(AlarmManager.RTC, mCalendar.getTimeInMillis(),
+				pendingIntent);
 
 		return super.onStartCommand(intent, flags, startId);
 
