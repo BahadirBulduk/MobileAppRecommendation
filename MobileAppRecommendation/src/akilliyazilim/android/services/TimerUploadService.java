@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 public class TimerUploadService extends Service {
 	private Calendar mCalendar;
@@ -35,8 +36,8 @@ public class TimerUploadService extends Service {
 		// mCalendar.get(Calendar.DAY_OF_MONTH));
 
 		/**** Burayý kontrol etmek lazým zamanlamanýn dogru oldugundan ****/
-		mCalendar.set(Calendar.HOUR_OF_DAY, 9);
-		mCalendar.set(Calendar.MINUTE, 00);
+		mCalendar.set(Calendar.HOUR_OF_DAY, 00);
+		mCalendar.set(Calendar.MINUTE, 36);
 		mCalendar.set(Calendar.SECOND, 00);
 		mCalendar.set(Calendar.AM, Calendar.PM);
 		/* Zaman gelince Upload Receiver devreye gierecek */
@@ -45,7 +46,6 @@ public class TimerUploadService extends Service {
 
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(
 				TimerUploadService.this, 0, receiverIntent, 0);
-
 		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		/*
 		 * Alarm Manager set et (tetiklenecek zaman ve intent parametre olarak
