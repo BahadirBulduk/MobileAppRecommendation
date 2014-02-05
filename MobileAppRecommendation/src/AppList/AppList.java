@@ -25,7 +25,8 @@ public class AppList {
 	String androidId;
 	ContentValues values;
 	
-	@SuppressLint("NewApi") public AppList(Activity a,String id) {
+	@SuppressLint("NewApi") 
+	public AppList(Activity a,String id) {
 		// TODO Auto-generated constructor stub
 		androidId = id;
 		database = new DatabaseHelper(a.getApplicationContext(), id+".db");
@@ -36,6 +37,7 @@ public class AppList {
 		List<PackageInfo> packageList = packageManager
 				.getInstalledPackages(PackageManager.GET_PERMISSIONS);
 		packageList1 = new ArrayList<PackageInfo>();
+		
 		/* Sistem uygulamalarýný listeye ekleme */
 		for (PackageInfo pi : packageList) {
 			boolean b = isSystemPackage(pi);
@@ -43,9 +45,9 @@ public class AppList {
 				packageList1.add(pi);
 				values.put("TelId", androidId);
 				values.put("AppName", pi.packageName.toString());
-				values.put("InstallDate", String.valueOf(pi.firstInstallTime));
+				values.put("InstallDate", setDateFormat(pi.firstInstallTime));
 				values.putNull("DeletedDate");
-				db.insert("AppList", null, values);
+				db.insertOrThrow("AppList", null, values);
 			}
 		}
 		db.close();

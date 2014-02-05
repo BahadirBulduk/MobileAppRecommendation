@@ -51,7 +51,7 @@ public class RecomendationService extends Service {
 				.setContentTitle("Uygulama Baþlýðý")
 				.setContentText("Ufak Uygulama Yazýsý")
 				.setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
-				.addAction(R.drawable.ic_launcher, "Call", pIntent).build();
+				.build();
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		n.flags |= Notification.FLAG_AUTO_CANCEL;

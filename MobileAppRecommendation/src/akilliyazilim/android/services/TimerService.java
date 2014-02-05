@@ -34,8 +34,8 @@ public class TimerService extends Service {
 				mCalendar.get(Calendar.MONTH),
 				mCalendar.get(Calendar.DAY_OF_MONTH));
 
-		mCalendar.set(Calendar.HOUR_OF_DAY, 02);
-		mCalendar.set(Calendar.MINUTE, 26);
+		mCalendar.set(Calendar.HOUR_OF_DAY, 20);
+		mCalendar.set(Calendar.MINUTE, 47);
 		mCalendar.set(Calendar.SECOND, 00);
 		mCalendar.set(Calendar.AM, Calendar.PM);
 

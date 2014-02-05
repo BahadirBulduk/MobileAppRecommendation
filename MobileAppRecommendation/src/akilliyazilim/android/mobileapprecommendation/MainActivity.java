@@ -25,10 +25,11 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		androidId = Settings.Secure.getString(getContentResolver(),
+				Settings.Secure.ANDROID_ID);
 		File f = new File(getDatabasePath(androidId+".db").toString());
 		if(!f.isFile()){
-			androidId = Settings.Secure.getString(getContentResolver(),
-					Settings.Secure.ANDROID_ID);
+			
 			database = new DatabaseHelper(getApplicationContext(), androidId
 					+ ".db");
 			database.close();

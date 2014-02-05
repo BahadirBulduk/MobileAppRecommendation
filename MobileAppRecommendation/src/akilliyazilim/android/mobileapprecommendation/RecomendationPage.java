@@ -1,8 +1,11 @@
 package akilliyazilim.android.mobileapprecommendation;
 
+import javax.security.auth.Destroyable;
+
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
 import akilliyazilim.android.services.RecomendationService;
+import akilliyazilim.android.services.TimerService;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.mobileapprecommendation.R;
 
@@ -20,19 +24,26 @@ public class RecomendationPage extends Activity {
 
 	private Button button;
 	private Spinner spinnerAnket1, spinnerAnket2, spinnerAnket3;
-	String cevap1, cevap2, cevap3, appName,appPopulerLinkList,appEditorLinkList;
+	String cevap1, cevap2, cevap3, appName, appPopulerLinkList,
+			appEditorLinkList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recomendation);
-
+		Intent stopIntent = new Intent(RecomendationPage.this,
+				RecomendationService.class);
+		stopService(stopIntent);
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			appName = extras.getString("appName");
 			appPopulerLinkList = extras.getString("appPopulerLinkList");
 			appEditorLinkList = extras.getString("appEditorLinkList");
+			Toast.makeText(getApplicationContext(),
+					appPopulerLinkList + "++++" + appEditorLinkList,
+					Toast.LENGTH_SHORT).show();
+
 		}
 
 		spinnerAnket1 = (Spinner) findViewById(R.id.spinner1);
@@ -45,9 +56,10 @@ public class RecomendationPage extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String AndroidId = Settings.Secure.getString(getContentResolver(),
-						Settings.Secure.ANDROID_ID);
-				DatabaseHelper database = new DatabaseHelper(getApplicationContext(), AndroidId+".db");
+				String AndroidId = Settings.Secure.getString(
+						getContentResolver(), Settings.Secure.ANDROID_ID);
+				DatabaseHelper database = new DatabaseHelper(
+						getApplicationContext(), AndroidId + ".db");
 				SQLiteDatabase db = database.getWritableDatabase();
 				ContentValues values = new ContentValues();
 				cevap1 = String.valueOf(spinnerAnket1.getSelectedItem());
@@ -72,8 +84,13 @@ public class RecomendationPage extends Activity {
 			}
 		});
 
-		Intent stopIntent = new Intent(RecomendationPage.this,
-				RecomendationService.class);
-		stopService(stopIntent);
+	}
+
+
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		Toast.makeText(getApplicationContext(),
+				"Lutfen sorulari cevaplayýnýz.", Toast.LENGTH_SHORT).show();
 	}
 }

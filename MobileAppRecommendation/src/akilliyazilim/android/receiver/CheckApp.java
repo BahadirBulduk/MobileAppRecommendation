@@ -38,7 +38,7 @@ public class CheckApp extends BroadcastReceiver {
 		 */
 		
 		// Silinen veya yüklenen uygulama önerilen uygulama ise Recommendation tablosu update edilir.
-		for(int i =0;i<8;i++){
+		for(int i =0;i<3;i++){
 			if(intent.getData().getEncodedSchemeSpecificPart().equals(Constants.appEditorPackageList[i])||intent.getData().getEncodedSchemeSpecificPart().equals(Constants.appPopulerPackageList[i]) ){
 				if(intent.getAction().toString().equals("android.intent.action.PACKAGE_REMOVED")){
 					ContentValues values = new ContentValues();

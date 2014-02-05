@@ -1,5 +1,6 @@
-	package akilliyazilim.android.services;
+package akilliyazilim.android.services;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.text.format.DateFormat;
 import android.util.Log;
 
 public class AppTrackingService extends Service {
@@ -65,16 +65,16 @@ public class AppTrackingService extends Service {
 				if (lastPackageName != null) {
 					/* Database'e yazýlacak androidId ve tarih alýndý */
 					String androidId = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
-					Date dt = new Date();
-					CharSequence s  = DateFormat.format("dd-mm-yyyy ", dt.getTime());
-					Log.i("tarih",Calendar.DAY_OF_MONTH+"--"+Calendar.MONTH+"--"+"2014");
+//					Date dt = new Date();
+//					CharSequence s  = DateFormat.format("dd-mm-yyyy ", dt.getTime());
+					String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 					/*Database'e yazma islemi gerceklestirildi*/
 					SQLiteDatabase db = database.getWritableDatabase();
 					ContentValues values = new ContentValues();
 					values.put("TelId", androidId);//string
 					values.put("AppName", lastPackageName);//string
 					values.put("DurationOfUse", counter);//int
-					values.put("Date",Calendar.DAY_OF_MONTH+"-"+Calendar.MONTH+"-"+"2014");//string
+					values.put("Date",currentDateTimeString);//string
 					db.insertOrThrow("AppTracking", null, values);
 					db.close();	
 				}
@@ -83,11 +83,10 @@ public class AppTrackingService extends Service {
 			/* Bir önceki uygulamanýn package name elde et! */
 			lastPackageName = taskInfo.get(0).topActivity.getPackageName();
 		} catch (Exception e) {
-			Log.i("hata",e.getLocalizedMessage() +"----" + e.getMessage());
+			Log.w("hata",e.getLocalizedMessage() +"--" + e.getMessage());
 		}
 		return super.onStartCommand(intent, flags, startId);
 	}
-
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
