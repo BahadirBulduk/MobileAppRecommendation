@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE AppList (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId STRING,AppName String,InstallDate STRING,DeletedDate STRING)");
 		db.execSQL("CREATE TABLE Recommendation (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId STRING,AppName String,InstallDate STRING,DeletedDate STRING)");
 		db.execSQL("CREATE TABLE AppTracking (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId STRING,AppName STRING,DurationOfUse Integer,Date STRING)");
+		db.execSQL("CREATE TABLE Survey (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId STRING,recommendationAppName,answer1 STRING,answer2 STRING,answer3 STRING,link STRING,playLink STRING)");
 	}
 
 	@Override
@@ -30,8 +31,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXIST AppList");
 		db.execSQL("DROP TABLE IF EXIST Recommendation");
 		db.execSQL("DROP TABLE IF EXIST AppTracking");
+		db.execSQL("DROP TABLE IF EXIST Survey");
 		onCreate(db);
-
 	}
 
 }
