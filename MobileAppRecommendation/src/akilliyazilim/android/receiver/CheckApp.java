@@ -1,15 +1,11 @@
 package akilliyazilim.android.receiver;
 
 import java.util.Date;
-import java.util.List;
 
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
 import akilliyazilim.android.mobileapprecommendation.MainActivity;
-import akilliyazilim.android.services.AppTrackingService;
-import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
