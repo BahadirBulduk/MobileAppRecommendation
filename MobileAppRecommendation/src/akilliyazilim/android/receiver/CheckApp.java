@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import akilliyazilim.android.Database.DatabaseHelper;
+import akilliyazilim.android.constants.Constants;
 import akilliyazilim.android.mobileapprecommendation.MainActivity;
 import akilliyazilim.android.services.AppTrackingService;
 import android.app.ActivityManager;
@@ -42,7 +43,7 @@ public class CheckApp extends BroadcastReceiver {
 		
 		// Silinen veya yüklenen uygulama önerilen uygulama ise Recommendation tablosu update edilir.
 		for(int i =0;i<8;i++){
-			if(intent.getData().getEncodedSchemeSpecificPart().contains("kadýnýn verdiði uygulama isimleri kontrol edilecek")){
+			if(intent.getData().getEncodedSchemeSpecificPart().equals(Constants.appEditorPackageList[i])||intent.getData().getEncodedSchemeSpecificPart().equals(Constants.appPopulerPackageList[i]) ){
 				if(intent.getAction().toString().equals("android.intent.action.PACKAGE_REMOVED")){
 					ContentValues values = new ContentValues();
 					values.put("DeletedDate",s+"" );
