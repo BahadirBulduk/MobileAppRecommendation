@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.mobileapprecommendation.R;
 
@@ -16,7 +15,7 @@ public class RecomendationPage extends Activity {
 
 	private Button button;
 	private Spinner spinnerAnket1, spinnerAnket2, spinnerAnket3;
-	String cevap1, cevap2, cevap3, value;
+	String cevap1, cevap2, cevap3, appName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +25,8 @@ public class RecomendationPage extends Activity {
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			value = extras.getString("message");
+			appName = extras.getString("appName");
 		}
-
-		Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT)
-				.show();
 
 		spinnerAnket1 = (Spinner) findViewById(R.id.spinner1);
 		spinnerAnket2 = (Spinner) findViewById(R.id.spinner2);

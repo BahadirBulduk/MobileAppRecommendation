@@ -1,5 +1,6 @@
 package akilliyazilim.android.services;
 
+import akilliyazilim.android.constants.Constants;
 import akilliyazilim.android.mobileapprecommendation.RecomendationPage;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -31,7 +32,18 @@ public class RecomendationService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Intent intentNotif = new Intent(getBaseContext(),
 				RecomendationPage.class);
-		intentNotif.putExtra("message", "message");
+		/*** index düzenlemesi yapýlacak ***/
+		intentNotif.putExtra("appName", Constants.appNameList[0]);
+		intentNotif.putExtra("appInfo", Constants.appInfoList[0]);
+		intentNotif.putExtra("appPopulerLinkList",
+				Constants.appPopulerLinkList[0]);
+		intentNotif.putExtra("appEditorLinkList",
+				Constants.appEditorLinkList[0]);
+		intentNotif.putExtra("appPopulerPackageList",
+				Constants.appPopulerPackageList[0]);
+		intentNotif.putExtra("appEditorPackageList",
+				Constants.appEditorPackageList[0]);
+
 		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intentNotif,
 				0);
 
