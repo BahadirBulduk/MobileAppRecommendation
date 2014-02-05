@@ -27,6 +27,8 @@ public class AppTrackingService extends Service {
 	public static ActivityManager activityManager;
 	ComponentName componentInfo;
 	DatabaseHelper database;
+	String androidId;
+	
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
@@ -38,7 +40,8 @@ public class AppTrackingService extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		database = MainActivity.database;
+		androidId = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
+		database = new DatabaseHelper(getApplicationContext(),androidId+".db");
 		activityManager = (ActivityManager) this
 				.getSystemService(ACTIVITY_SERVICE);
 
@@ -55,33 +58,32 @@ public class AppTrackingService extends Service {
 			/* Ayný Uygulama çalýþmaya devam ederken */
 			if (componentInfo.getPackageName().equals(lastPackageName)) {
 				counter++;
+				Log.i("counter",counter+"-");
 			}
 			/* Yený bir uygulama açýldýgýnda counter sýfýrlanýr */
 			else {
 				if (lastPackageName != null) {
-//deneme 
 					/* Database'e yazýlacak androidId ve tarih alýndý */
 					String androidId = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
 					Date dt = new Date();
 					CharSequence s  = DateFormat.format("dd-mm-yyyy ", dt.getTime());
-					
+					Log.i("tarih",Calendar.DAY_OF_MONTH+"--"+Calendar.MONTH+"--"+"2014");
 					/*Database'e yazma islemi gerceklestirildi*/
 					SQLiteDatabase db = database.getWritableDatabase();
 					ContentValues values = new ContentValues();
 					values.put("TelId", androidId);//string
 					values.put("AppName", lastPackageName);//string
 					values.put("DurationOfUse", counter);//int
-					values.put("Date",s+"");//string
+					values.put("Date",Calendar.DAY_OF_MONTH+"-"+Calendar.MONTH+"-"+"2014");//string
 					db.insertOrThrow("AppTracking", null, values);
-					db.close();				
+					db.close();	
 				}
 				counter = 0;
 			}
 			/* Bir önceki uygulamanýn package name elde et! */
 			lastPackageName = taskInfo.get(0).topActivity.getPackageName();
-			Log.i("denemeee",lastPackageName);
 		} catch (Exception e) {
-
+			Log.i("hata",e.getLocalizedMessage() +"----" + e.getMessage());
 		}
 		return super.onStartCommand(intent, flags, startId);
 	}

@@ -13,12 +13,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.util.Log;
 
 public class CheckApp extends BroadcastReceiver {
 
 	DatabaseHelper database;
+	String androidId;
+	
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
@@ -27,8 +30,8 @@ public class CheckApp extends BroadcastReceiver {
 		/* yapýlan iþlem */
 		Log.i("LOG", intent.getAction().toString());
 
-		
-		database = MainActivity.database;
+		androidId = Settings.Secure.getString(context.getContentResolver(),Settings.Secure.ANDROID_ID);
+		database = new DatabaseHelper(context,androidId+".db");
 		SQLiteDatabase db = database.getWritableDatabase();
 		Date dt = new Date();
 		CharSequence s  = DateFormat.format("dd-mm-yyyy ", dt.getTime());
@@ -69,6 +72,8 @@ public class CheckApp extends BroadcastReceiver {
 				values.putNull("DeletedDate");
 				db.insert("AppList", null, values);
 			}
+			
+			db.close();
 	}
-
+	
 }
