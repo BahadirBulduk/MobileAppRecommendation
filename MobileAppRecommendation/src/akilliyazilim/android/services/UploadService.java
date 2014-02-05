@@ -9,18 +9,21 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.mobileapprecommendation.MainActivity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
+import android.provider.Settings;
 
 public class UploadService extends Service {
 	int serverResponseCode = 0;
 	public String upLoadServerUri = "http://akilliyazilim.org/MobileSurveyApp/UploadToServer.php";
-
+	String androidId;
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
@@ -30,13 +33,22 @@ public class UploadService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
+		
 		if (isNetworkAvailable()) {
 			// internet var
+			androidId = Settings.Secure.getString(getContentResolver(),
+					Settings.Secure.ANDROID_ID);
 			int resultResponse = uploadFile(getDatabasePath(
-					MainActivity.androidId + ".db").toString());
+					androidId + ".db").toString());
 
 			if (resultResponse == 200) {
-				// iþlem basarýlý
+				// iþlem basarýlý. tablolar sýfýrlandý. Servis durduruldu.
+				DatabaseHelper database = new DatabaseHelper(getApplicationContext(),androidId+".db");
+				SQLiteDatabase db = database.getWritableDatabase();
+				db.delete("CallLog", null, null);
+				db.delete("AppTracking", null, null);
+				db.close();
+				stopSelf(); //Murat Bundan Emin Deðil :D
 			}
 
 		} else {
@@ -130,10 +142,6 @@ public class UploadService extends Service {
 				serverResponseCode = conn.getResponseCode();
 				String serverResponseMessage = conn.getResponseMessage();
 
-				if (serverResponseCode == 200) {
-					// iþlem basarýlý servis kill edilebilir
-				}
-
 				// stream kapanmalý // ?? exception olursa ?
 				fileInputStream.close();
 				dos.flush();
@@ -148,10 +156,11 @@ public class UploadService extends Service {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (Exception e){
+				e.printStackTrace();
 			}
 		}
-
-		return 0;
+		return serverResponseCode;
 
 	}
 
