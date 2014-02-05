@@ -28,16 +28,16 @@ public class TimerService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
 
-		// mCalendar = Calendar.getInstance();
-		// /* zaman ayarlamalarýný yap */
-		// mCalendar.set(mCalendar.get(Calendar.YEAR),
-		// mCalendar.get(Calendar.MONTH),
-		// mCalendar.get(Calendar.DAY_OF_MONTH));
-		//
-		// mCalendar.set(Calendar.HOUR_OF_DAY, 15);
-		// mCalendar.set(Calendar.MINUTE, 01);
-		// mCalendar.set(Calendar.SECOND, 00);
-		// mCalendar.set(Calendar.AM_PM, Calendar.PM);
+		mCalendar = Calendar.getInstance();
+		/* zaman ayarlamalarýný yap */
+		mCalendar.set(mCalendar.get(Calendar.YEAR),
+				mCalendar.get(Calendar.MONTH),
+				mCalendar.get(Calendar.DAY_OF_MONTH));
+
+		mCalendar.set(Calendar.HOUR_OF_DAY, 02);
+		mCalendar.set(Calendar.MINUTE, 26);
+		mCalendar.set(Calendar.SECOND, 00);
+		mCalendar.set(Calendar.AM, Calendar.PM);
 
 		Intent receiverIntent = new Intent(TimerService.this,
 				AlarmReceiver.class);

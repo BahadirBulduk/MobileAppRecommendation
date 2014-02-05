@@ -31,16 +31,18 @@ public class RecomendationService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Intent intentNotif = new Intent(getBaseContext(),
 				RecomendationPage.class);
+		intentNotif.putExtra("message", "message");
 		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intentNotif,
 				0);
-		/* Notification yapýsý tanýmlanýyor */
+
 		Notification n = new NotificationCompat.Builder(this)
-				.setContentTitle("Uygulama Baþlýðý ")
+				.setContentTitle("Uygulama Baþlýðý")
 				.setContentText("Ufak Uygulama Yazýsý")
 				.setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
 				.addAction(R.drawable.ic_launcher, "Call", pIntent).build();
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		// n.flags |= Notification.FLAG_AUTO_CANCEL; flag degýsmeli
+		n.flags |= Notification.FLAG_ONGOING_EVENT;
+		n.flags |= Notification.FLAG_AUTO_CANCEL;
 
 		notificationManager.notify(0, n);
 		return super.onStartCommand(intent, flags, startId);

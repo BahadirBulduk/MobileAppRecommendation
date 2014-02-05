@@ -64,6 +64,12 @@
 
         <service android:name="akilliyazilim.android.services.UploadService" >
         </service>
+        <receiver android:name="akilliyazilim.android.receiver.TimerStartReceiver">
+              <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="Manual_Start_Recom" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
