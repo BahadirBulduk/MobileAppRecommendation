@@ -7,11 +7,11 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -64,17 +64,25 @@
 
         <service android:name="akilliyazilim.android.services.UploadService" >
         </service>
-        <receiver android:name="akilliyazilim.android.receiver.TimerStartReceiver">
-              <intent-filter>
+
+        <receiver android:name="akilliyazilim.android.receiver.TimerStartReceiver" >
+            <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="Manual_Start_Recom" />
             </intent-filter>
         </receiver>
-       
-        <receiver android:name="akilliyazilim.android.receiver.UploadReceiver">
-            
+        <receiver android:name="akilliyazilim.android.receiver.UploadReceiver" >
         </receiver>
-        <service android:name="akilliyazilim.android.services.TimerUploadService"></service>
+
+        <service android:name="akilliyazilim.android.services.TimerUploadService" >
+        </service>
+
+        <receiver android:name="akilliyazilim.android.receiver.StartTimerUpload" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="Manual_Start_Upload" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

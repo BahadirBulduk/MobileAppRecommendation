@@ -1,7 +1,6 @@
 package akilliyazilim.android.mobileapprecommendation;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import AppList.AppList;
 import akilliyazilim.android.Database.DatabaseHelper;
@@ -10,7 +9,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Menu;
 
 import com.example.mobileapprecommendation.R;
@@ -27,16 +25,17 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		androidId = Settings.Secure.getString(getContentResolver(),
 				Settings.Secure.ANDROID_ID);
-		File f = new File(getDatabasePath(androidId+".db").toString());
-		if(!f.isFile()){
-			
+		File f = new File(getDatabasePath(androidId + ".db").toString());
+		if (!f.isFile()) {
+
 			database = new DatabaseHelper(getApplicationContext(), androidId
 					+ ".db");
 			database.close();
-			 AppList a = new AppList(this,androidId);
+			AppList a = new AppList(this, androidId);
 		}
 		initialize();
 		startServiceRecom();
+		startServiceUpload();
 	}
 
 	private void initialize() {
@@ -50,6 +49,14 @@ public class MainActivity extends Activity {
 		/* Manual Kontrol */
 		getBaseContext().getApplicationContext().sendBroadcast(
 				new Intent("Manual_Start_Recom"));
+
+	}
+
+	public void startServiceUpload() {
+
+		/* Manual Kontrol */
+		getBaseContext().getApplicationContext().sendBroadcast(
+				new Intent("Manual_Start_Upload"));
 
 	}
 
