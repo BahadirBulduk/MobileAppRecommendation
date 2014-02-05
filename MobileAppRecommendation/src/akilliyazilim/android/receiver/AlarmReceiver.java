@@ -11,6 +11,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
 		/* service tanýmla */
+		// Intent service = new Intent(context, TimerService.class);
+		// context.stopService(service);
 		Intent service1 = new Intent(context, RecomendationService.class);
 		context.startService(service1);
 	}

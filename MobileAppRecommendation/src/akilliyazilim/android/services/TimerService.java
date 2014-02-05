@@ -30,12 +30,12 @@ public class TimerService extends Service {
 
 		mCalendar = Calendar.getInstance();
 		/* zaman ayarlamalarýný yap */
-		mCalendar.set(mCalendar.get(Calendar.YEAR),
-				mCalendar.get(Calendar.MONTH),
-				mCalendar.get(Calendar.DAY_OF_MONTH));
+		// mCalendar.set(mCalendar.get(Calendar.YEAR),
+		// mCalendar.get(Calendar.MONTH),
+		// mCalendar.get(Calendar.DAY_OF_MONTH));
 
-		mCalendar.set(Calendar.HOUR_OF_DAY, 20);
-		mCalendar.set(Calendar.MINUTE, 47);
+		mCalendar.set(Calendar.HOUR_OF_DAY, 21);
+		mCalendar.set(Calendar.MINUTE, 59);
 		mCalendar.set(Calendar.SECOND, 00);
 		mCalendar.set(Calendar.AM, Calendar.PM);
 
@@ -50,8 +50,11 @@ public class TimerService extends Service {
 		 * Alarm Manager set et (tetiklenecek zaman ve intent parametre olarak
 		 * ekleniyor)!
 		 */
-		alarmManager.set(AlarmManager.RTC, mCalendar.getTimeInMillis(),
-				pendingIntent);
+		// alarmManager.set(AlarmManager.RTC, mCalendar.getTimeInMillis(),
+		// pendingIntent);
+
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+				mCalendar.getTimeInMillis(), 180000, pendingIntent);
 
 		return super.onStartCommand(intent, flags, startId);
 
