@@ -8,11 +8,11 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mobileapprecommendation.R;
@@ -21,26 +21,33 @@ public class RecomendationPage extends Activity {
 
 	private Button button;
 	private Spinner spinnerAnket1, spinnerAnket2, spinnerAnket3;
-	String cevap1, cevap2, cevap3, appName, appPopulerLinkList,
+	String cevap1, cevap2, cevap3, appName, appInfo, appPopulerLinkList,
 			appEditorLinkList;
+	TextView txtappName, txtAppInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recomendation);
-		Log.i("LOG", "RecomendationPage");
+
+		txtappName = (TextView) findViewById(R.id.textAppName);
+		txtAppInfo = (TextView) findViewById(R.id.textAppInfo);
 		Intent stopIntent = new Intent(RecomendationPage.this,
 				RecomendationService.class);
 		stopService(stopIntent);
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			appName = extras.getString("appName");
+			appInfo = extras.getString("appInfo");
 			appPopulerLinkList = extras.getString("appPopulerLinkList");
 			appEditorLinkList = extras.getString("appEditorLinkList");
 			Toast.makeText(getApplicationContext(),
 					appPopulerLinkList + "++++" + appEditorLinkList,
 					Toast.LENGTH_SHORT).show();
+
+			txtappName.setText(appName);
+			txtAppInfo.setText(appInfo);
 
 		}
 

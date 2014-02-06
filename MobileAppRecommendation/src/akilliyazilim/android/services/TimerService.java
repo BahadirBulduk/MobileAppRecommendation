@@ -3,6 +3,7 @@ package akilliyazilim.android.services;
 import java.util.Calendar;
 import java.util.Random;
 
+import akilliyazilim.android.constants.Constants;
 import akilliyazilim.android.receiver.AlarmReceiver;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -65,7 +66,8 @@ public class TimerService extends Service {
 		// pendingIntent);
 		// Inexact
 		alarmManager.setRepeating(AlarmManager.RTC,
-				mCalendar.getTimeInMillis(), 180000, pendingIntent);
+				mCalendar.getTimeInMillis(),
+				Constants.schedule[ran.nextInt(10)], pendingIntent);
 
 		// alarmManager.setInexactRepeating(AlarmManager.RTC,
 		// mCalendar.getTimeInMillis(), 180000, pendingIntent);

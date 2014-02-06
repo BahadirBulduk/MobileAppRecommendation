@@ -19,23 +19,31 @@
                 android:id="@+id/textAppName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:text="Appname" />
 
             <TextView
                 android:id="@+id/textAppInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:text="appınfo" />
 
             <TextView
                 android:id="@+id/textCumle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="cumle" />
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/anketmesaji" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -43,18 +51,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="anket1" />
+                    android:text="Bu uygulama:" />
 
                 <Spinner
                     android:id="@+id/spinner1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:entries="@array/anket1" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -62,18 +73,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="anket2" />
+                    android:text="Bu uygulama beni" />
 
                 <Spinner
                     android:id="@+id/spinner2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:entries="@array/anket2" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -81,13 +95,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="anket3" />
+                    android:text="Uygulama tanıtımını" />
 
                 <Spinner
                     android:id="@+id/spinner3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:entries="@array/anket3" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

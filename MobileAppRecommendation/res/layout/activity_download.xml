@@ -18,23 +18,33 @@
                 android:id="@+id/textBaslik"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Benzer uygulamalar arasından sizin için seçilen öneriler aşağıda verilmektedir. Aşağıda verilen önerilerden birini tıklayınız.Bu sayede uygulamayı cep telefonunuza yükleyebilirsiniz." />
+
             <TextView
                 android:id="@+id/textLink1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="En popüler uygulamalar listesinden öneri" />
+
             <TextView
                 android:id="@+id/textLink2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
-             <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Google Play editörün seçimi listesinden öneri" />
+
+            <TextView
                 android:id="@+id/textLink3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
-
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Yüklemek istemiyorum" />
         </LinearLayout>
     </ScrollView>
 
