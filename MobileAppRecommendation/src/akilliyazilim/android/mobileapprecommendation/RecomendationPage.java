@@ -1,17 +1,14 @@
 package akilliyazilim.android.mobileapprecommendation;
 
-import javax.security.auth.Destroyable;
-
 import akilliyazilim.android.Database.DatabaseHelper;
-import akilliyazilim.android.constants.Constants;
 import akilliyazilim.android.services.RecomendationService;
-import akilliyazilim.android.services.TimerService;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -32,6 +29,7 @@ public class RecomendationPage extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recomendation);
+		Log.i("LOG", "RecomendationPage");
 		Intent stopIntent = new Intent(RecomendationPage.this,
 				RecomendationService.class);
 		stopService(stopIntent);
@@ -85,7 +83,6 @@ public class RecomendationPage extends Activity {
 		});
 
 	}
-
 
 	@Override
 	public void onBackPressed() {

@@ -9,6 +9,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.example.mobileapprecommendation.R;
 
@@ -43,6 +44,7 @@ public class RecomendationService extends Service {
 				Constants.appPopulerPackageList[0]);
 		intentNotif.putExtra("appEditorPackageList",
 				Constants.appEditorPackageList[0]);
+		Log.i("LOG", "RecomendationService");
 
 		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intentNotif,
 				0);
@@ -53,10 +55,14 @@ public class RecomendationService extends Service {
 				.setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
 				.build();
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		n.defaults |= Notification.DEFAULT_ALL;
 		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		n.flags |= Notification.FLAG_AUTO_CANCEL;
+		Log.i("LOG", "RecomendationService1");
 
 		notificationManager.notify(0, n);
+		Log.i("LOG", "RecomendationService2");
+
 		return super.onStartCommand(intent, flags, startId);
 	}
 

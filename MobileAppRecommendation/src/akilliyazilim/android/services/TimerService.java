@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 public class TimerService extends Service {
 	private Calendar mCalendar;
@@ -34,9 +35,15 @@ public class TimerService extends Service {
 		// mCalendar.get(Calendar.MONTH),
 		// mCalendar.get(Calendar.DAY_OF_MONTH));
 
-		mCalendar.set(Calendar.HOUR_OF_DAY, 12);
-		mCalendar.set(Calendar.MINUTE, 36);
-		mCalendar.set(Calendar.SECOND, 00);
+		mCalendar.set(Calendar.HOUR_OF_DAY,
+				Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+		Log.i("LOG", Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "");
+		mCalendar.set(Calendar.MINUTE,
+				Calendar.getInstance().get(Calendar.MINUTE));
+		Log.i("LOG", Calendar.getInstance().get(Calendar.MINUTE) + "");
+
+		mCalendar.set(Calendar.SECOND,
+				Calendar.getInstance().get(Calendar.SECOND));
 		mCalendar.set(Calendar.AM, Calendar.PM);
 
 		Intent receiverIntent = new Intent(TimerService.this,
@@ -53,7 +60,7 @@ public class TimerService extends Service {
 		// alarmManager.set(AlarmManager.RTC, mCalendar.getTimeInMillis(),
 		// pendingIntent);
 		// Inexact
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+		alarmManager.setRepeating(AlarmManager.RTC,
 				mCalendar.getTimeInMillis(), 180000, pendingIntent);
 
 		// alarmManager.setInexactRepeating(AlarmManager.RTC,
