@@ -36,12 +36,10 @@ public class UploadService extends Service {
 	@SuppressLint("NewApi") @Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		Log.i("control", "2");
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 		if (isNetworkAvailable()) {
 			// internet var
-			Log.i("control", "3");
 
 			androidId = Settings.Secure.getString(getContentResolver(),
 					Settings.Secure.ANDROID_ID);
@@ -112,7 +110,6 @@ public class UploadService extends Service {
 				Log.i("control", "url");
 				// URL ^e bir tane Http connection olustur
 				conn = (HttpURLConnection) url.openConnection();
-				Log.i("control", "conn");
 				conn.setDoInput(true); // inputlara izin ver
 				conn.setDoOutput(true); // outputlara izin ver
 				conn.setUseCaches(false); // cachlenmiþ kopya kullanma
@@ -122,26 +119,20 @@ public class UploadService extends Service {
 				conn.setRequestProperty("Content-Type",
 						"multipart/form-data;boundary=" + boundary);
 				conn.setRequestProperty("uploaded_file", fileName);
-				Log.i("control", "output once");
 				OutputStream o = conn.getOutputStream();
-				Log.i("control","o sonrasý");
 				dos = new DataOutputStream(conn.getOutputStream());
-				Log.i("control", "output");
 				dos.writeBytes(twoHyphens + boundary + lineEnd);
 				dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
 						+ fileName + "\"" + lineEnd);
 
 				dos.writeBytes(lineEnd);
-				Log.i("control", "write");
 				// buffer maksimum size olustur
 				bytesAvailable = fileInputStream.available();
-				Log.i("control", "bytesAvailable");
 				bufferSize = Math.min(bytesAvailable, maxBufferSize);
 				buffer = new byte[bufferSize];
 
 				// dosyayý oku ve yaz
 				bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-				Log.i("control", "read");
 
 				while (bytesRead > 0) {
 
@@ -154,13 +145,11 @@ public class UploadService extends Service {
 
 				dos.writeBytes(lineEnd);
 				dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-				Log.i("control", "dos write");
 
 				// Serveerdan gelen response code
 				Log.i("control", "responsecode");
 
 				serverResponseCode = conn.getResponseCode();
-				Log.i("control", "code sonra");
 
 				String serverResponseMessage = conn.getResponseMessage();
 				Log.i("control", "basarili");
@@ -171,18 +160,18 @@ public class UploadService extends Service {
 
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
-				Log.i("control", "11");
+				Log.i("control", "FileNotFoundException");
 				e.printStackTrace();
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
-				Log.i("control", "12");
+				Log.i("control", "MalformedURLException");
 				e.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				Log.i("control", "13");
+				Log.i("control", "IOException");
 				e.printStackTrace();
 			} catch (Exception e){
-				Log.i("control", "14");
+				Log.i("control", "Exception");
 				e.printStackTrace();
 			}
 		}

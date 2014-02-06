@@ -1,11 +1,13 @@
 package akilliyazilim.android.receiver;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.sql.Date;
+import android.provider.CallLog;
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.services.UploadService;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -13,30 +15,44 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.provider.Settings;
+import android.util.Log;
 
 public class UploadReceiver extends BroadcastReceiver {
 
-	String day, month;
-	String year = "2014";
+	String gun, ay;
+	String yil ;
 	int NumberOfIncomingCall = 0, NumberOfOutgoingCall = 0,
 			TimeOfIncomingCall = 0, TimeOfOutgoingCall = 0,
 			NumberOfDifferentCall = 0, NumberOfContact = 0;
-	String date;
+//	String date;
 	ArrayList<String> phoneNumber;
 
-	@Override
+	@SuppressLint("SimpleDateFormat") @Override
 	public void onReceive(Context context, Intent arg1) {
 		// TODO Auto-generated method stub
 		/* UploadService calýsmaya baslar */
 
 		/* Burada callLog db ye kaydedýlebilir */
+
+		Calendar c2 = Calendar.getInstance();
+		SimpleDateFormat d = new SimpleDateFormat("dd");
+		SimpleDateFormat m = new SimpleDateFormat("MM");
+		SimpleDateFormat y = new SimpleDateFormat("yyyy");
+		String gun = d.format(c2.getTime());
+		String ay = m.format(c2.getTime());
+		String yil = y.format(c2.getTime());
+
+		//		Time today = new Time(Time.getCurrentTimezone());
+//		today.setToNow();
+//		Toast.makeText(context, today.monthDay + "", Toast.LENGTH_LONG).show();
+
+		
 		phoneNumber = new ArrayList<String>();
-		day = String.valueOf(Calendar.DAY_OF_MONTH);
-		month = String.valueOf(Calendar.MONTH);
-		date = day + "-" + month + "-" + year;
+//		day = String.valueOf(Calendar.DAY_OF_MONTH);
+//		month = String.valueOf(Calendar.MONTH);
+//		date = day + "-" + month + "-" + year;
 		String androidId = Settings.Secure.getString(
 				context.getContentResolver(), Settings.Secure.ANDROID_ID);
 
@@ -55,13 +71,16 @@ public class UploadReceiver extends BroadcastReceiver {
 			String callDuration = managedCursor.getString(duration);
 			String dir = null;
 			int dircode = Integer.parseInt(callType);
+			Log.i("compare1", callDayTime.toString());
+			Log.i("compare2", yil + "-" + ay + "-" + ay);
 
-			if (callDayTime.toString().equals(year + "-" + day + "-" + month)) {
+			if (callDayTime.toString().equals(yil + "-" + ay + "-" + gun)) {
 				switch (dircode) {
 				case CallLog.Calls.OUTGOING_TYPE:
 					NumberOfOutgoingCall++;
 					if(!phoneNumber.contains(phNumber)){
 						phoneNumber.add(phNumber);
+						Log.i("phoneNumber", "eklendi giden");
 						NumberOfDifferentCall++;
 					}
 					TimeOfOutgoingCall +=Integer.parseInt(callDuration);
@@ -79,6 +98,7 @@ public class UploadReceiver extends BroadcastReceiver {
 					break;
 				}
 			}
+			phoneNumber.size();
 			
 		}
 		managedCursor.close();
@@ -111,10 +131,10 @@ public class UploadReceiver extends BroadcastReceiver {
 		values.put("TimeOfOutgoingCall", TimeOfOutgoingCall);
 		values.put("NumberOfDifferentCall", NumberOfDifferentCall);
 		values.put("NumberOfContact", NumberOfContact);
-		values.put("Date", date);
+		values.put("Date", yil + "-" + gun + "-" + ay);
         db.insertOrThrow("CallLog", null, values);
         db.close();
-        
+        Log.i("db","database");
         
         
 		Intent i = new Intent(context, UploadService.class);
