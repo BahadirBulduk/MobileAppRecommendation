@@ -50,8 +50,9 @@ public class RecomendationService extends Service {
 				0);
 
 		Notification n = new NotificationCompat.Builder(this)
-				.setContentTitle("Uygulama Baþlýðý")
-				.setContentText("Ufak Uygulama Yazýsý")
+				.setContentTitle("Uygulama Önerisi" + 1)
+				// i+1 ile yer deðiþtirecek
+				.setContentText(Constants.appNameList[0])
 				.setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
 				.build();
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

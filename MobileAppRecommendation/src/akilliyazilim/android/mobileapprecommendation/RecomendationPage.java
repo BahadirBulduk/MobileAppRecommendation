@@ -78,6 +78,8 @@ public class RecomendationPage extends Activity {
 				i.putExtra("appPopulerLinkList", appPopulerLinkList);
 				i.putExtra("appEditorLinkList", appEditorLinkList);
 				startActivity(i);
+				overridePendingTransition(R.anim.slide_in_left,
+						R.anim.slide_out_left);
 				finish();
 			}
 		});

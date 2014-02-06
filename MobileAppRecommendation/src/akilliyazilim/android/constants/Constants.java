@@ -15,4 +15,7 @@ public class Constants {
 	public static String[] appEditorPackageList = { "Ornek Uygulama-1",
 			"Ornek Uygulama-2", "Ornek Uygulama-3" };
 
+	public static int[] schedule = { 54000000, 57600000, 61200000, 64800000,
+			68400000, 72000000 };
+
 }

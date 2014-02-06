@@ -1,6 +1,7 @@
 package akilliyazilim.android.services;
 
 import java.util.Calendar;
+import java.util.Random;
 
 import akilliyazilim.android.receiver.AlarmReceiver;
 import android.app.AlarmManager;
@@ -34,9 +35,12 @@ public class TimerService extends Service {
 		// mCalendar.set(mCalendar.get(Calendar.YEAR),
 		// mCalendar.get(Calendar.MONTH),
 		// mCalendar.get(Calendar.DAY_OF_MONTH));
+		Random ran = new Random();
 
-		mCalendar.set(Calendar.HOUR_OF_DAY,
-				Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+		mCalendar.set(
+				Calendar.HOUR_OF_DAY,
+				Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+						+ (1 + ran.nextInt(5)));
 		Log.i("LOG", Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "");
 		mCalendar.set(Calendar.MINUTE,
 				Calendar.getInstance().get(Calendar.MINUTE));
