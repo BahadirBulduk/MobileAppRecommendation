@@ -52,10 +52,7 @@ public class DownloadPage extends Activity {
 		appEditorLinkList = extras.getString("appEditorLinkList");
 		Log.i("appPopulerLinkList", appPopulerLinkList);
 
-		Calendar c2 = Calendar.getInstance();
-		SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
-		String strdate2 = sdf2.format(c2.getTime());
-		database  = new DatabaseHelper(getApplicationContext(), androidId+"-"+strdate2+".db");
+		database  = new DatabaseHelper(getApplicationContext(), androidId+".db");
 		db = database.getReadableDatabase();
 		String query = "SELECT next FROM NotifId";
 		Cursor c = db.rawQuery(query, null);
