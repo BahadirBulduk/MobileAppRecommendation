@@ -35,10 +35,11 @@ public class MainActivity extends Activity {
 					+ ".db");
 			database.close();
 			AppList a = new AppList(this, androidId);
+			initialize();
+			startServiceRecom();
+			startServiceUpload();
 		}
-		initialize();
-		startServiceRecom();
-		startServiceUpload();
+		
 	}
 
 	private void initialize() {
@@ -61,13 +62,6 @@ public class MainActivity extends Activity {
 		getBaseContext().getApplicationContext().sendBroadcast(
 				new Intent("Manual_Start_Upload"));
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 
 }

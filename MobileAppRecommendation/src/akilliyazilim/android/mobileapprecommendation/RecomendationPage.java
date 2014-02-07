@@ -50,7 +50,7 @@ public class RecomendationPage extends Activity {
 			txtAppInfo.setText(appInfo);
 
 		}
-
+		
 		spinnerAnket1 = (Spinner) findViewById(R.id.spinner1);
 		spinnerAnket2 = (Spinner) findViewById(R.id.spinner2);
 		spinnerAnket3 = (Spinner) findViewById(R.id.spinner3);
