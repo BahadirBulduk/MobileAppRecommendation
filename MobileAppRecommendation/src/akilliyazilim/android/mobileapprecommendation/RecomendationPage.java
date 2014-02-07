@@ -67,12 +67,7 @@ public class RecomendationPage extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String AndroidId = Settings.Secure.getString(
-						getContentResolver(), Settings.Secure.ANDROID_ID);
-				Calendar c2 = Calendar.getInstance();
-				SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
-				String strdate2 = sdf2.format(c2.getTime());
-				DatabaseHelper database  = new DatabaseHelper(getApplicationContext(), androidId+"-"+strdate2+".db");
+				DatabaseHelper database  = new DatabaseHelper(getApplicationContext(), androidId+".db");
 				SQLiteDatabase db = database.getWritableDatabase();
 				ContentValues values = new ContentValues();
 				cevap1 = String.valueOf(spinnerAnket1.getSelectedItem());

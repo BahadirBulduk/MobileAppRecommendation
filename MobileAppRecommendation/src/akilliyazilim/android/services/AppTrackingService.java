@@ -42,10 +42,7 @@ public class AppTrackingService extends Service {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		androidId = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
-		Calendar c2 = Calendar.getInstance();
-		SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
-		String strdate2 = sdf2.format(c2.getTime());
-		database  = new DatabaseHelper(getApplicationContext(), androidId+"-"+strdate2+".db");
+		database  = new DatabaseHelper(getApplicationContext(), androidId+".db");
 		activityManager = (ActivityManager) this
 				.getSystemService(ACTIVITY_SERVICE);
 

@@ -30,7 +30,6 @@ public class UploadService extends Service {
 	int serverResponseCode = 0;
 	public String upLoadServerUri = "http://akilliyazilim.org/MobileSurveyApp/UploadToServer.php";
 	String androidId;
-	String strdate2;
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
@@ -44,22 +43,19 @@ public class UploadService extends Service {
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
-		Calendar c2 = Calendar.getInstance();
-		SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
-		strdate2 = sdf2.format(c2.getTime());
 		if (isNetworkAvailable()) {
 			// internet var
 			Constants.code = 1;
 			androidId = Settings.Secure.getString(getContentResolver(),
 					Settings.Secure.ANDROID_ID);
-			int resultResponse = uploadFile(getDatabasePath(androidId+"-"+strdate2+ ".db")
+			int resultResponse = uploadFile(getDatabasePath(androidId+".db")
 					.toString());
 			Log.i("control", resultResponse + "");
 
 			if (resultResponse == 200) {
 				// iþlem basarýlý. tablolar sýfýrlandý. Servis durduruldu.
 				
-				DatabaseHelper database = new DatabaseHelper(getApplicationContext(), androidId+"-"+strdate2+".db");
+				DatabaseHelper database = new DatabaseHelper(getApplicationContext(), androidId+".db");
 				SQLiteDatabase db = database.getWritableDatabase();
 				db.delete("CallLog", null, null);
 				db.delete("AppTracking", null, null);

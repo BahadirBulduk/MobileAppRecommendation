@@ -34,10 +34,7 @@ public class MainActivity extends Activity {
 				Settings.Secure.ANDROID_ID);
 		File f = new File(getDatabasePath(androidId + ".db").toString());
 		if (!f.isFile()) {
-			Calendar c2 = Calendar.getInstance();
-			SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
-			String strdate2 = sdf2.format(c2.getTime());
-			database  = new DatabaseHelper(getApplicationContext(), androidId+"-"+strdate2+".db");
+			database  = new DatabaseHelper(getApplicationContext(), androidId+".db");
 			SQLiteDatabase db = database.getWritableDatabase();
 			ContentValues values = new ContentValues();
 			values.put("next", 0);

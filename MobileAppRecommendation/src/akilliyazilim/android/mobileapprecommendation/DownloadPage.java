@@ -51,7 +51,6 @@ public class DownloadPage extends Activity {
 		appPopulerLinkList = extras.getString("appPopulerLinkList");
 		appEditorLinkList = extras.getString("appEditorLinkList");
 		Log.i("appPopulerLinkList", appPopulerLinkList);
-
 		database  = new DatabaseHelper(getApplicationContext(), androidId+".db");
 		db = database.getReadableDatabase();
 		String query = "SELECT next FROM NotifId";

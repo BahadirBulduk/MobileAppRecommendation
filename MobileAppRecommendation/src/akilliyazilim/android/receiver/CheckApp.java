@@ -30,10 +30,7 @@ public class CheckApp extends BroadcastReceiver {
 		Log.i("LOG", intent.getAction().toString());
 
 		androidId = Settings.Secure.getString(context.getContentResolver(),Settings.Secure.ANDROID_ID);
-		Calendar c2 = Calendar.getInstance();
-		SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
-		String strdate2 = sdf2.format(c2.getTime());
-		database  = new DatabaseHelper(context, androidId+"-"+strdate2+".db");
+		database  = new DatabaseHelper(context, androidId+".db");
 		
 		SQLiteDatabase db = database.getWritableDatabase();
 		Date dt = new Date();

@@ -1,14 +1,16 @@
 package akilliyazilim.android.Database;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.Settings;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public static final int VERSION = 1;
-
 	public DatabaseHelper(Context context, String db_name) {
+		
 		super(context, db_name, null, VERSION);
 		// TODO Auto-generated constructor stub
 	}
