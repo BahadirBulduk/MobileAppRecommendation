@@ -22,7 +22,7 @@ public class InternetReceiver extends BroadcastReceiver {
 				if (Constants.code == 1111) {
 					Log.i("internet", "var");
 					Intent service = new Intent(context, UploadService.class);
-					context.stopService(service);
+					context.startService(service);
 				}
 
 			} else if (intent.getBooleanExtra(
