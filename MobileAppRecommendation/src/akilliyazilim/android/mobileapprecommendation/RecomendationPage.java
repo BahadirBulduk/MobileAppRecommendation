@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,6 +24,7 @@ public class RecomendationPage extends Activity {
 	private Spinner spinnerAnket1, spinnerAnket2, spinnerAnket3;
 	String cevap1, cevap2, cevap3, appName, appInfo, appPopulerLinkList,
 			appEditorLinkList;
+	String androidId;
 	TextView txtappName, txtAppInfo;
 
 	@Override
@@ -30,7 +32,8 @@ public class RecomendationPage extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recomendation);
-
+		androidId = Settings.Secure.getString(getContentResolver(),
+				Settings.Secure.ANDROID_ID);
 		txtappName = (TextView) findViewById(R.id.textAppName);
 		txtAppInfo = (TextView) findViewById(R.id.textAppInfo);
 		Intent stopIntent = new Intent(RecomendationPage.this,
@@ -70,8 +73,15 @@ public class RecomendationPage extends Activity {
 				cevap1 = String.valueOf(spinnerAnket1.getSelectedItem());
 				cevap2 = String.valueOf(spinnerAnket2.getSelectedItem());
 				cevap3 = String.valueOf(spinnerAnket3.getSelectedItem());
+				Log.i("cevap",cevap1);
+				Log.i("cevap",cevap2);
+				Log.i("cevap",cevap3);
+				Log.i("cevap",appName);
+				Log.i("cevap",androidId);
+
+				
 				/* Bu bilgiler burada db ye yazýlmalý */
-				values.put("TelId", cevap1);
+				values.put("TelId", androidId);
 				values.put("recommendationAppName", appName);
 				values.put("answer1", cevap1);
 				values.put("answer2", cevap2);

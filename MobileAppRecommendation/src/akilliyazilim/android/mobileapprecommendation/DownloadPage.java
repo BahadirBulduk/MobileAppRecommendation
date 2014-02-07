@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ public class DownloadPage extends Activity {
 	SQLiteDatabase db;
 	ContentValues values;
 	String appPopulerLinkList, appEditorLinkList;
-
+	String androidId;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -32,12 +33,10 @@ public class DownloadPage extends Activity {
 		whereDatabase = extras.getString("appName");
 		appPopulerLinkList = extras.getString("appPopulerLinkList");
 		appEditorLinkList = extras.getString("appEditorLinkList");
+		Log.i("appPopulerLinkList",appPopulerLinkList);
 
-		String androidId = Settings.Secure.getString(getContentResolver(),
+		 androidId = Settings.Secure.getString(getContentResolver(),
 				Settings.Secure.ANDROID_ID);
-		DatabaseHelper database = new DatabaseHelper(getApplicationContext(),
-				androidId + ".db");
-		db = database.getWritableDatabase();
 		values = new ContentValues();
 		textLink1 = (TextView) findViewById(R.id.textLink1);
 		textLink2 = (TextView) findViewById(R.id.textLink2);
@@ -49,13 +48,18 @@ public class DownloadPage extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				DatabaseHelper database = new DatabaseHelper(getApplicationContext(),
+						androidId + ".db");
+				db = database.getWritableDatabase();
+				values.put("playLink", appPopulerLinkList);
+				db.update("Survey", values, "recommendationAppName = ?",
+						new String[] { whereDatabase });
+				db.close();
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
 						.parse(appPopulerLinkList));
 				startActivity(browserIntent);
-				values.put("playLink", appPopulerLinkList);
-				db.update("Survey", values, "appName = ?",
-						new String[] { whereDatabase });
-				db.close();
+				
+
 			}
 		});
 		textLink2.setOnClickListener(new OnClickListener() {
@@ -63,13 +67,17 @@ public class DownloadPage extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				DatabaseHelper database = new DatabaseHelper(getApplicationContext(),
+						androidId + ".db");
+				db = database.getWritableDatabase();
+				values.put("playLink", appEditorLinkList);
+				db.update("Survey", values, "recommendationAppName = ?",
+						new String[] { whereDatabase });
+				db.close();
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
 						.parse(appEditorLinkList));
 				startActivity(browserIntent);
-				values.put("playLink", appEditorLinkList);
-				db.update("Survey", values, "appName = ?",
-						new String[] { whereDatabase });
-				db.close();
+				
 			}
 		});
 		textLink3.setOnClickListener(new OnClickListener() {
@@ -77,8 +85,11 @@ public class DownloadPage extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				DatabaseHelper database = new DatabaseHelper(getApplicationContext(),
+						androidId + ".db");
+				db = database.getWritableDatabase();
 				values.put("playLink", "yuklemedi");
-				db.update("Survey", values, "appName = ?",
+				db.update("Survey", values, "recommendationAppName = ?",
 						new String[] { whereDatabase });
 				db.close();
 			}
