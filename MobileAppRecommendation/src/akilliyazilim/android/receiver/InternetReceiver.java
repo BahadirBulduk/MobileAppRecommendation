@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 public class InternetReceiver extends BroadcastReceiver {
 
@@ -19,12 +20,15 @@ public class InternetReceiver extends BroadcastReceiver {
 			if (ni != null && ni.getState() == NetworkInfo.State.CONNECTED) {
 				// internet baglantýsý mevcut
 				if (Constants.code == 1111) {
+					Log.i("internet", "var");
 					Intent service = new Intent(context, UploadService.class);
 					context.stopService(service);
 				}
 
 			} else if (intent.getBooleanExtra(
 					ConnectivityManager.EXTRA_NO_CONNECTIVITY, Boolean.FALSE)) {
+				Log.i("internet", "yok");
+
 				// ýnternet baglantýsý yok
 			}
 		}
