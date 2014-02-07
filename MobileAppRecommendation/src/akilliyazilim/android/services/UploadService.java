@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import akilliyazilim.android.Database.DatabaseHelper;
+import akilliyazilim.android.constants.Constants;
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
@@ -27,34 +28,38 @@ public class UploadService extends Service {
 	int serverResponseCode = 0;
 	public String upLoadServerUri = "http://akilliyazilim.org/MobileSurveyApp/UploadToServer.php";
 	String androidId;
+
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@SuppressLint("NewApi") @Override
+	@SuppressLint("NewApi")
+	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 		if (isNetworkAvailable()) {
 			// internet var
-
+			Constants.code = 1;
 			androidId = Settings.Secure.getString(getContentResolver(),
 					Settings.Secure.ANDROID_ID);
-			int resultResponse = uploadFile(getDatabasePath(
-					androidId + ".db").toString());
-			Log.i("control", resultResponse +"");
+			int resultResponse = uploadFile(getDatabasePath(androidId + ".db")
+					.toString());
+			Log.i("control", resultResponse + "");
 
 			if (resultResponse == 200) {
 				// iþlem basarýlý. tablolar sýfýrlandý. Servis durduruldu.
-				DatabaseHelper database = new DatabaseHelper(getApplicationContext(),androidId+".db");
+				DatabaseHelper database = new DatabaseHelper(
+						getApplicationContext(), androidId + ".db");
 				SQLiteDatabase db = database.getWritableDatabase();
 				db.delete("CallLog", null, null);
 				db.delete("AppTracking", null, null);
 				db.close();
-				stopSelf(); //Murat Bundan Emin Deðil :D
+				stopSelf(); // Murat Bundan Emin Deðil :D
 				Log.i("control", "basarili");
 
 			}
@@ -62,6 +67,7 @@ public class UploadService extends Service {
 		} else {
 			// internet yok.
 			Log.i("control", "internet yok");
+			Constants.code = 1111;
 
 		}
 		return super.onStartCommand(intent, flags, startId);
@@ -170,7 +176,7 @@ public class UploadService extends Service {
 				// TODO Auto-generated catch block
 				Log.i("control", "IOException");
 				e.printStackTrace();
-			} catch (Exception e){
+			} catch (Exception e) {
 				Log.i("control", "Exception");
 				e.printStackTrace();
 			}

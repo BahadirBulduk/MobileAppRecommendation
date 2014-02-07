@@ -87,6 +87,11 @@
                 <action android:name="Manual_Start_Upload" />
             </intent-filter>
         </receiver>
+        <receiver android:name="akilliyazilim.android.receiver.InternetReceiver">
+             <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

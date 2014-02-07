@@ -25,4 +25,6 @@ public class Constants {
 	public static int[] schedule = { 54000000, 57600000, 61200000, 64800000,
 			68400000, 72000000, 75600000, 79200000, 82800000, 86400000 };
 
+	public static int code = 1;
+
 }
