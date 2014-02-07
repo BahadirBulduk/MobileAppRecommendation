@@ -1,5 +1,6 @@
 package akilliyazilim.android.services;
 
+import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
 import akilliyazilim.android.mobileapprecommendation.RecomendationPage;
 import android.app.Notification;
@@ -7,7 +8,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -16,7 +20,7 @@ import com.example.mobileapprecommendation.R;
 public class RecomendationService extends Service {
 
 	private NotificationManager mManager;
-
+	private int index;
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
@@ -33,26 +37,36 @@ public class RecomendationService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Intent intentNotif = new Intent(getBaseContext(),
 				RecomendationPage.class);
+		String androidId = Settings.Secure.getString(getContentResolver(),
+				Settings.Secure.ANDROID_ID);
 		/*** index düzenlemesi yapýlacak ***/
-		intentNotif.putExtra("appName", Constants.appNameList[0]);
-		intentNotif.putExtra("appInfo", Constants.appInfoList[0]);
+		DatabaseHelper db_helper = new DatabaseHelper(getApplicationContext(), androidId+".db");
+		SQLiteDatabase db = db_helper.getReadableDatabase();
+		String query = "SELECT next FROM NotifId";
+		Cursor c = db.rawQuery(query, null);
+		c.moveToFirst();
+		index =Integer.parseInt(c.getString(0));
+		db.close();
+		Log.i("index",index +"--");
+		intentNotif.putExtra("appName", Constants.appNameList[index]);
+		intentNotif.putExtra("appInfo", Constants.appInfoList[index]);
 		intentNotif.putExtra("appPopulerLinkList",
-				Constants.appPopulerLinkList[0]);
+				Constants.appPopulerLinkList[index]);
 		intentNotif.putExtra("appEditorLinkList",
-				Constants.appEditorLinkList[0]);
+				Constants.appEditorLinkList[index]);
 		intentNotif.putExtra("appPopulerPackageList",
-				Constants.appPopulerPackageList[0]);
+				Constants.appPopulerPackageList[index]);
 		intentNotif.putExtra("appEditorPackageList",
-				Constants.appEditorPackageList[0]);
+				Constants.appEditorPackageList[index]);
 		Log.i("LOG", "RecomendationService");
 
 		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intentNotif,
 				0);
 
 		Notification n = new NotificationCompat.Builder(this)
-				.setContentTitle("Uygulama Önerisi" + 1)
+				.setContentTitle("Uygulama Önerisi" +(index+ 1))
 				// i+1 ile yer deðiþtirecek
-				.setContentText(Constants.appNameList[0])
+				.setContentText(Constants.appNameList[index])
 				.setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
 				.build();
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -63,7 +77,7 @@ public class RecomendationService extends Service {
 
 		notificationManager.notify(0, n);
 		Log.i("LOG", "RecomendationService2");
-
+		
 		return super.onStartCommand(intent, flags, startId);
 	}
 

@@ -6,7 +6,9 @@ import AppList.AppList;
 import akilliyazilim.android.Database.DatabaseHelper;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
@@ -30,9 +32,12 @@ public class MainActivity extends Activity {
 				Settings.Secure.ANDROID_ID);
 		File f = new File(getDatabasePath(androidId + ".db").toString());
 		if (!f.isFile()) {
-
 			database = new DatabaseHelper(getApplicationContext(), androidId
 					+ ".db");
+			SQLiteDatabase db = database.getWritableDatabase();
+			ContentValues values = new ContentValues();
+			values.put("next", 0);
+			db.insertOrThrow("NotifId", null, values);
 			database.close();
 			AppList a = new AppList(this, androidId);
 			initialize();

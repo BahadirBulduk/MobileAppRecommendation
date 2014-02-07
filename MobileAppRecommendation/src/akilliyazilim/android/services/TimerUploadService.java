@@ -35,7 +35,7 @@ public class TimerUploadService extends Service {
 		// mCalendar.get(Calendar.DAY_OF_MONTH));
 
 		/**** Burayý kontrol etmek lazým zamanlamanýn dogru oldugundan ****/
-		mCalendar.set(Calendar.HOUR_OF_DAY, 9);
+		mCalendar.set(Calendar.HOUR_OF_DAY, 21);
 		mCalendar.set(Calendar.MINUTE, 00);
 		mCalendar.set(Calendar.SECOND, 00);
 		mCalendar.set(Calendar.AM, Calendar.PM);

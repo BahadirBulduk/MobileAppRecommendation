@@ -1,10 +1,15 @@
 package akilliyazilim.android.mobileapprecommendation;
 
 import akilliyazilim.android.Database.DatabaseHelper;
+import akilliyazilim.android.constants.Constants;
+import akilliyazilim.android.services.AppTrackingService;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Application;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,33 +21,46 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mobileapprecommendation.R;
 
-public class DownloadPage extends Activity {
+@SuppressLint("NewApi") public class DownloadPage extends Activity {
 
 	TextView textLink1, textLink2, textLink3;
 	String whereDatabase;
 	SQLiteDatabase db;
-	ContentValues values;
+	ContentValues values,values2;
 	String appPopulerLinkList, appEditorLinkList;
 	String androidId;
-
+	int count;
+	DatabaseHelper database;
+	int count2;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download);
-
+		
+		androidId = Settings.Secure.getString(getContentResolver(),
+				Settings.Secure.ANDROID_ID);
 		Bundle extras = getIntent().getExtras();
 		whereDatabase = extras.getString("appName");
 		appPopulerLinkList = extras.getString("appPopulerLinkList");
 		appEditorLinkList = extras.getString("appEditorLinkList");
 		Log.i("appPopulerLinkList", appPopulerLinkList);
-
-		androidId = Settings.Secure.getString(getContentResolver(),
-				Settings.Secure.ANDROID_ID);
+		
+		database = new DatabaseHelper(
+				getApplicationContext(), androidId + ".db");
+		db = database.getReadableDatabase();
+		String query = "SELECT next FROM NotifId";
+		Cursor c = db.rawQuery(query, null);
+		c.moveToFirst();
+		count = Integer.parseInt(c.getString(0));
+		count2 = count;
+		db.close();
 		values = new ContentValues();
+		values2 = new ContentValues();
 		textLink1 = (TextView) findViewById(R.id.textLink1);
 		textLink2 = (TextView) findViewById(R.id.textLink2);
 		textLink3 = (TextView) findViewById(R.id.textLink3);
@@ -53,12 +71,18 @@ public class DownloadPage extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				DatabaseHelper database = new DatabaseHelper(
-						getApplicationContext(), androidId + ".db");
+			
 				db = database.getWritableDatabase();
 				values.put("playLink", appPopulerLinkList);
 				db.update("Survey", values, "recommendationAppName = ?",
 						new String[] { whereDatabase });
+				if(count<3){
+					values2.put("next", (count+1));
+					db.update("NotifId", values2, null, null);
+				}else{
+					Toast.makeText(getApplicationContext(), "Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.", Toast.LENGTH_LONG).show();
+				}
+				
 				db.close();
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
 						.parse(appPopulerLinkList));
@@ -71,12 +95,17 @@ public class DownloadPage extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				DatabaseHelper database = new DatabaseHelper(
-						getApplicationContext(), androidId + ".db");
+
 				db = database.getWritableDatabase();
 				values.put("playLink", appEditorLinkList);
 				db.update("Survey", values, "recommendationAppName = ?",
 						new String[] { whereDatabase });
+				if(count<3){
+					values2.put("next", (count+1));
+					db.update("NotifId", values2, null, null);
+				}else{
+					Toast.makeText(getApplicationContext(), "Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.", Toast.LENGTH_LONG).show();
+				}
 				db.close();
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
 						.parse(appEditorLinkList));
@@ -119,20 +148,51 @@ public class DownloadPage extends Activity {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-
+						db = database.getWritableDatabase();
+						values.put("playLink", "yuklemedi");
+						db.update("Survey", values, "recommendationAppName = ?",
+								new String[] { whereDatabase });
+						if(count<3){
+							values2.put("next", (count+1));
+							db.update("NotifId", values2, null, null);
+						}else{
+							Toast.makeText(getApplicationContext(), "Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.", Toast.LENGTH_LONG).show();
+							
+						}
+						int c1 = 0,c2=0,c3=0,c4=0,c5=0,c6=0;		
 						if (checkBox1.isChecked()) {
+							c1=1;
 						}
 						if (checkBox2.isChecked()) {
+							c2=1;
 						}
 						if (checkBox3.isChecked()) {
+							c3=1;
 						}
 						if (checkBox4.isChecked()) {
+							c4=1;
 						}
 						if (checkBox5.isChecked()) {
+							c5=1;
 						}
 						if (checkBox6.isChecked()) {
+							c6=1;
 						}
 						// editText.getText();
+						ContentValues value = new ContentValues();
+						value.put("recommendationAppName", Constants.appNameList[count2]);
+						value.put("benzer",c1+"");
+						value.put("hafiza",c2+"");
+						value.put("guvenlik",c3+"");
+						value.put("pil",c4+"");
+						value.put("begenmedi",c5+"");
+						value.put("ilgi",c6+"");
+						if(!editText.getText().toString().isEmpty()){
+							value.put("diger", editText.getText().toString());
+						}else
+							value.put("diger", "baska neden yok");
+						db.insertOrThrow("Survey2", null, value);
+						db.close();
 						dialog.dismiss();
 					}
 				});
@@ -142,17 +202,16 @@ public class DownloadPage extends Activity {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
+						db = database.getWritableDatabase();
+						ContentValues cv = new ContentValues();
+						cv.put("next", (count-1));
+						db.update("NotifId", cv, null, null);
+						db.close();
 						dialog.dismiss();
-
 					}
 				});
-				DatabaseHelper database = new DatabaseHelper(
-						getApplicationContext(), androidId + ".db");
-				db = database.getWritableDatabase();
-				values.put("playLink", "yuklemedi");
-				db.update("Survey", values, "recommendationAppName = ?",
-						new String[] { whereDatabase });
-				db.close();
+
+				
 			}
 		});
 
