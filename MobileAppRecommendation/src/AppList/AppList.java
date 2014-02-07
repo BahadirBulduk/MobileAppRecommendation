@@ -2,6 +2,7 @@ package AppList;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,10 @@ public class AppList {
 	public AppList(Activity a,String id) {
 		// TODO Auto-generated constructor stub
 		androidId = id;
-		database = new DatabaseHelper(a.getApplicationContext(), id+".db");
+		Calendar c2 = Calendar.getInstance();
+		SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
+		String strdate2 = sdf2.format(c2.getTime());
+		database = new DatabaseHelper(a.getApplicationContext(), androidId +"-"+strdate2+".db");
 		db = database.getWritableDatabase();
 		values = new ContentValues();
 		

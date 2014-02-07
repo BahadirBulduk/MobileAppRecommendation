@@ -1,5 +1,8 @@
 package akilliyazilim.android.mobileapprecommendation;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
 import android.annotation.SuppressLint;
@@ -49,8 +52,10 @@ public class DownloadPage extends Activity {
 		appEditorLinkList = extras.getString("appEditorLinkList");
 		Log.i("appPopulerLinkList", appPopulerLinkList);
 
-		database = new DatabaseHelper(getApplicationContext(), androidId
-				+ ".db");
+		Calendar c2 = Calendar.getInstance();
+		SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
+		String strdate2 = sdf2.format(c2.getTime());
+		database  = new DatabaseHelper(getApplicationContext(), androidId+"-"+strdate2+".db");
 		db = database.getReadableDatabase();
 		String query = "SELECT next FROM NotifId";
 		Cursor c = db.rawQuery(query, null);

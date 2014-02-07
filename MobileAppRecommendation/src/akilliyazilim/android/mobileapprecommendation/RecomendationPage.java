@@ -1,5 +1,8 @@
 package akilliyazilim.android.mobileapprecommendation;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.services.RecomendationService;
 import android.app.Activity;
@@ -66,8 +69,10 @@ public class RecomendationPage extends Activity {
 				// TODO Auto-generated method stub
 				String AndroidId = Settings.Secure.getString(
 						getContentResolver(), Settings.Secure.ANDROID_ID);
-				DatabaseHelper database = new DatabaseHelper(
-						getApplicationContext(), AndroidId + ".db");
+				Calendar c2 = Calendar.getInstance();
+				SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
+				String strdate2 = sdf2.format(c2.getTime());
+				DatabaseHelper database  = new DatabaseHelper(getApplicationContext(), androidId+"-"+strdate2+".db");
 				SQLiteDatabase db = database.getWritableDatabase();
 				ContentValues values = new ContentValues();
 				cevap1 = String.valueOf(spinnerAnket1.getSelectedItem());

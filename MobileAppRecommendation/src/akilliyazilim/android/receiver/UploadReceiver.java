@@ -121,7 +121,10 @@ public class UploadReceiver extends BroadcastReceiver {
             } while (cursor.moveToNext()) ;
         }
         NumberOfContact =alContacts.size();
-        DatabaseHelper database = new DatabaseHelper(context, androidId + ".db");
+		Calendar c3 = Calendar.getInstance();
+		SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
+		String strdate2 = sdf2.format(c3.getTime());
+		DatabaseHelper database  = new DatabaseHelper(context, androidId+"-"+strdate2+".db");
 		SQLiteDatabase db = database.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put("TelId", androidId);

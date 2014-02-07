@@ -1,6 +1,7 @@
 package akilliyazilim.android.services;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +42,10 @@ public class AppTrackingService extends Service {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		androidId = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
-		database = new DatabaseHelper(getApplicationContext(),androidId+".db");
+		Calendar c2 = Calendar.getInstance();
+		SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
+		String strdate2 = sdf2.format(c2.getTime());
+		DatabaseHelper database  = new DatabaseHelper(getApplicationContext(), androidId+"-"+strdate2+".db");
 		activityManager = (ActivityManager) this
 				.getSystemService(ACTIVITY_SERVICE);
 

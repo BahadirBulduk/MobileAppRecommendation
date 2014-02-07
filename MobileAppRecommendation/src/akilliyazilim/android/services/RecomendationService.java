@@ -1,5 +1,8 @@
 package akilliyazilim.android.services;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
 import akilliyazilim.android.mobileapprecommendation.RecomendationPage;
@@ -40,7 +43,10 @@ public class RecomendationService extends Service {
 		String androidId = Settings.Secure.getString(getContentResolver(),
 				Settings.Secure.ANDROID_ID);
 		/*** index düzenlemesi yapýlacak ***/
-		DatabaseHelper db_helper = new DatabaseHelper(getApplicationContext(), androidId+".db");
+		Calendar c2 = Calendar.getInstance();
+		SimpleDateFormat sdf2 = new SimpleDateFormat("H:m:s");
+		String strdate2 = sdf2.format(c2.getTime());
+		DatabaseHelper db_helper = new DatabaseHelper(getApplicationContext(), androidId+"-"+strdate2+".db");
 		SQLiteDatabase db = db_helper.getReadableDatabase();
 		String query = "SELECT next FROM NotifId";
 		Cursor c = db.rawQuery(query, null);
