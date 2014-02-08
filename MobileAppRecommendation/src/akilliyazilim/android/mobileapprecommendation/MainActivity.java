@@ -1,8 +1,6 @@
 package akilliyazilim.android.mobileapprecommendation;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import AppList.AppList;
 import akilliyazilim.android.Database.DatabaseHelper;
@@ -14,9 +12,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
-import android.view.Menu;
-
-import com.example.mobileapprecommendation.R;
 
 public class MainActivity extends Activity {
 

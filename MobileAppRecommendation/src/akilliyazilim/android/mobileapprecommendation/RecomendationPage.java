@@ -1,8 +1,5 @@
 package akilliyazilim.android.mobileapprecommendation;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.services.RecomendationService;
 import android.app.Activity;
@@ -18,8 +15,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.mobileapprecommendation.R;
 
 public class RecomendationPage extends Activity {
 

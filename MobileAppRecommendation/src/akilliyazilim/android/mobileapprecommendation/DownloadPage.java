@@ -1,8 +1,5 @@
 package akilliyazilim.android.mobileapprecommendation;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
 import android.annotation.SuppressLint;
@@ -22,8 +19,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.mobileapprecommendation.R;
 
 @SuppressLint("NewApi")
 public class DownloadPage extends Activity {

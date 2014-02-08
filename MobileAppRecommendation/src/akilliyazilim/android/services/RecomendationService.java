@@ -2,6 +2,7 @@ package akilliyazilim.android.services;
 
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
+import akilliyazilim.android.mobileapprecommendation.R;
 import akilliyazilim.android.mobileapprecommendation.RecomendationPage;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -14,8 +15,6 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-
-import com.example.mobileapprecommendation.R;
 
 public class RecomendationService extends Service {
 
