@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MobileAppRecommendation</string>
+    <string name="app_name">Mobile Survey</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="welcome_message">Merhaba,Bu çalışma kapsamında  sizlere mobil uygulamalar tanıtılmakta ve bu kısa uygulama tanıtımlarını dikkate alarak değerlendirme yapmanız istenmektedir. Toplamda 8 uygulama değerlendirilecek olup her gün 1 tanesi değerlendirmenize sunulacaktır. Katkılarınız için şimdiden teşekkürler</string>
