@@ -19,19 +19,24 @@
                 android:id="@+id/textAppName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:text="Appname"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textAppInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
-                android:text="appınfo"
-                android:textSize="15sp" />
+                android:text="AppInfo"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textCumle"
@@ -40,7 +45,8 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:text="@string/anketmesaji"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,7 +60,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Bu uygulama:" />
+                    android:text="Bu uygulama:"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/spinner1"
@@ -76,7 +83,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Bu uygulama beni" />
+                    android:text="Bu uygulama beni"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/spinner2"
@@ -98,7 +106,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Uygulama tanıtımını" />
+                    android:text="Uygulama tanıtımını"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/spinner3"
@@ -115,6 +124,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Devam" />
+        android:background="@drawable/button_design"
+        android:text="Devam"
+        android:textStyle="bold" />
 
 </RelativeLayout>

@@ -19,9 +19,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Benzer uygulamalar arasından sizin için seçilen öneriler aşağıda verilmektedir. Aşağıda verilen önerilerden birini tıklayınız.Bu sayede uygulamayı cep telefonunuza yükleyebilirsiniz."
-                android:textSize="15sp" />
+                android:text="@string/download_page_message"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/textLink1"
@@ -29,8 +31,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
-                android:text="En popüler uygulamalar listesinden öneri" />
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_design"
+                android:text="En popüler uygulamalar listesinden öneri"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/textLink2"
@@ -39,7 +43,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Google Play editörün seçimi listesinden öneri" />
+                android:background="@drawable/button_design"
+                android:text="Google Play editörün seçimi listesinden öneri"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/textLink3"
@@ -48,7 +54,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Yüklemek istemiyorum" />
+                android:background="@drawable/button_design"
+                android:text="Yüklemek istemiyorum"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 
