@@ -41,7 +41,7 @@ public class CheckApp extends BroadcastReceiver {
 		 */
 		
 		// Silinen veya yüklenen uygulama önerilen uygulama ise Recommendation tablosu update edilir.
-		for(int i =0;i<3;i++){
+		for(int i =0;i<8;i++){
 			if(intent.getData().getEncodedSchemeSpecificPart().equals(Constants.appEditorPackageList[i])||intent.getData().getEncodedSchemeSpecificPart().equals(Constants.appPopulerPackageList[i]) ){
 				if(intent.getAction().toString().equals("android.intent.action.PACKAGE_REMOVED")){
 					ContentValues values = new ContentValues();
@@ -54,7 +54,7 @@ public class CheckApp extends BroadcastReceiver {
 					values.put("AppName", intent.getData().getEncodedSchemeSpecificPart());
 					values.put("InstallDate", s+"");
 					values.putNull("DeletedDate");
-					db.insert("Recommendation", null, values);
+					db.insertOrThrow("Recommendation", null, values);
 					break;
 				}
 			}
@@ -70,7 +70,7 @@ public class CheckApp extends BroadcastReceiver {
 				values.put("AppName", intent.getData().getEncodedSchemeSpecificPart());
 				values.put("InstallDate", s+"");
 				values.putNull("DeletedDate");
-				db.insert("AppList", null, values);
+				db.insertOrThrow("AppList", null, values);
 			}
 			
 			db.close();

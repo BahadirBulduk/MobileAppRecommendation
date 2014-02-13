@@ -48,6 +48,7 @@ public class AppList {
 				values.put("AppName", pi.packageName.toString());
 				values.put("InstallDate", setDateFormat(pi.firstInstallTime));
 				values.putNull("DeletedDate");
+				Log.i("Application",pi.applicationInfo.loadLabel(packageManager).toString());
 				db.insertOrThrow("AppList", null, values);
 			}
 		}
