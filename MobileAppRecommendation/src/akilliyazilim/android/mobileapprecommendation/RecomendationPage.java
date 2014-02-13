@@ -1,10 +1,12 @@
 package akilliyazilim.android.mobileapprecommendation;
 
 import akilliyazilim.android.Database.DatabaseHelper;
+import akilliyazilim.android.constants.Constants;
 import akilliyazilim.android.services.RecomendationService;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -24,7 +26,7 @@ public class RecomendationPage extends Activity {
 			appEditorLinkList;
 	String androidId;
 	TextView txtappName, txtAppInfo;
-
+	int index;	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -37,20 +39,28 @@ public class RecomendationPage extends Activity {
 		Intent stopIntent = new Intent(RecomendationPage.this,
 				RecomendationService.class);
 		stopService(stopIntent);
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			appName = extras.getString("appName");
-			appInfo = extras.getString("appInfo");
-			appPopulerLinkList = extras.getString("appPopulerLinkList");
-			appEditorLinkList = extras.getString("appEditorLinkList");
-			Toast.makeText(getApplicationContext(),
-					appPopulerLinkList + "++++" + appEditorLinkList,
-					Toast.LENGTH_SHORT).show();
-
-			txtappName.setText(appName);
-			txtAppInfo.setText(appInfo);
-
-		}
+		DatabaseHelper db = new DatabaseHelper(getApplicationContext(), androidId+".db");
+		SQLiteDatabase database = db.getReadableDatabase();
+		String query = "SELECT next FROM NotifId";
+		Cursor c = database.rawQuery(query, null);
+		c.moveToFirst();
+		index =Integer.parseInt(c.getString(0));
+		
+//		Bundle extras = getIntent().getExtras();
+//		if (extras != null) {
+		
+//			appName = extras.getString("appName");
+//			appInfo = extras.getString("appInfo");
+//			appPopulerLinkList = extras.getString("appPopulerLinkList");
+//			appEditorLinkList = extras.getString("appEditorLinkList");
+//			Log.i("qweqdasqweqw", extras.getString("appInfo"));
+//			txtappName.setText("");
+//			txtAppInfo.setText("");
+		
+			txtappName.setText(Constants.appNameList[index]);
+			txtAppInfo.setText(Constants.appInfoList[index]);
+			database.close();
+//		}
 		
 		spinnerAnket1 = (Spinner) findViewById(R.id.spinner1);
 		spinnerAnket2 = (Spinner) findViewById(R.id.spinner2);
@@ -68,16 +78,10 @@ public class RecomendationPage extends Activity {
 				cevap1 = String.valueOf(spinnerAnket1.getSelectedItem());
 				cevap2 = String.valueOf(spinnerAnket2.getSelectedItem());
 				cevap3 = String.valueOf(spinnerAnket3.getSelectedItem());
-				Log.i("cevap",cevap1);
-				Log.i("cevap",cevap2);
-				Log.i("cevap",cevap3);
-				Log.i("cevap",appName);
-				Log.i("cevap",androidId);
 
-				
 				/* Bu bilgiler burada db ye yazýlmalý */
 				values.put("TelId", androidId);
-				values.put("recommendationAppName", appName);
+				values.put("recommendationAppName", Constants.appNameList[index]);
 				values.put("answer1", cevap1);
 				values.put("answer2", cevap2);
 				values.put("answer3", cevap3);
@@ -86,9 +90,9 @@ public class RecomendationPage extends Activity {
 				db.close();
 				Intent i = new Intent(RecomendationPage.this,
 						DownloadPage.class);
-				i.putExtra("appName", appName);
-				i.putExtra("appPopulerLinkList", appPopulerLinkList);
-				i.putExtra("appEditorLinkList", appEditorLinkList);
+//				i.putExtra("appName", appName);
+//				i.putExtra("appPopulerLinkList", appPopulerLinkList);
+//				i.putExtra("appEditorLinkList", appEditorLinkList);
 				startActivity(i);
 				overridePendingTransition(R.anim.slide_in_left,
 						R.anim.slide_out_left);

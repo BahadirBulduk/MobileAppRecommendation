@@ -42,10 +42,20 @@ public class RecomendationService extends Service {
 		SQLiteDatabase db = db_helper.getReadableDatabase();
 		String query = "SELECT next FROM NotifId";
 		Cursor c = db.rawQuery(query, null);
+	
 		c.moveToFirst();
+		Log.i("sadasdadasd", c.getString(0));
 		index =Integer.parseInt(c.getString(0));
+		
 		db.close();
-		Log.i("index",index +"--");
+	
+		try {
+			Log.i("index",index +"--");
+			Log.i("appNameInfo",Constants.appInfoList[index]);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	
 		intentNotif.putExtra("appName", Constants.appNameList[index]);
 		intentNotif.putExtra("appInfo", Constants.appInfoList[index]);
 		intentNotif.putExtra("appPopulerLinkList",

@@ -43,17 +43,16 @@ public class DownloadPage extends Activity {
 
 		androidId = Settings.Secure.getString(getContentResolver(),
 				Settings.Secure.ANDROID_ID);
-		Bundle extras = getIntent().getExtras();
-		whereDatabase = extras.getString("appName");
-		appPopulerLinkList = extras.getString("appPopulerLinkList");
-		appEditorLinkList = extras.getString("appEditorLinkList");
-		Log.i("appPopulerLinkList", appPopulerLinkList);
+		
 		database  = new DatabaseHelper(getApplicationContext(), androidId+".db");
 		db = database.getReadableDatabase();
 		String query = "SELECT next FROM NotifId";
 		Cursor c = db.rawQuery(query, null);
 		c.moveToFirst();
 		count = Integer.parseInt(c.getString(0));
+		whereDatabase = Constants.appNameList[count];
+		appPopulerLinkList = Constants.appPopulerLinkList[count];
+		appEditorLinkList = Constants.appEditorLinkList[count];
 		count2 = count;
 		db.close();
 		values = new ContentValues();
