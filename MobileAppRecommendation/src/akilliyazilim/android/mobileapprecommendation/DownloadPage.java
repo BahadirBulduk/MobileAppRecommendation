@@ -2,6 +2,8 @@ package akilliyazilim.android.mobileapprecommendation;
 
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
+import akilliyazilim.android.services.RecomendationService;
+import akilliyazilim.android.services.TimerService;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -66,6 +68,7 @@ public class DownloadPage extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				textLink1.setClickable(false);
 				textLink2.setClickable(false);
 				textLink3.setClickable(false);
 
@@ -73,7 +76,7 @@ public class DownloadPage extends Activity {
 				values.put("playLink", appPopulerLinkList);
 				db.update("Survey", values, "recommendationAppName = ?",
 						new String[] { whereDatabase });
-				if (count < 3) {
+				if (count < 8) {
 					values2.put("next", (count + 1));
 					db.update("NotifId", values2, null, null);
 				} else {
@@ -81,13 +84,19 @@ public class DownloadPage extends Activity {
 							getApplicationContext(),
 							"Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.",
 							Toast.LENGTH_LONG).show();
+					Intent stopIntent = new Intent(DownloadPage.this,
+							RecomendationService.class);
+					stopService(stopIntent);
+					Intent stopIntent1 = new Intent(DownloadPage.this,
+							TimerService.class);
+					stopService(stopIntent1);
 				}
 
 				db.close();
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
 						.parse(appPopulerLinkList));
 				startActivity(browserIntent);
-
+				finish();
 			}
 		});
 		textLink2.setOnClickListener(new OnClickListener() {
@@ -96,13 +105,15 @@ public class DownloadPage extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				textLink1.setClickable(false);
+				textLink2.setClickable(false);
 				textLink3.setClickable(false);
+
 
 				db = database.getWritableDatabase();
 				values.put("playLink", appEditorLinkList);
 				db.update("Survey", values, "recommendationAppName = ?",
 						new String[] { whereDatabase });
-				if (count < 3) {
+				if (count < 8) {
 					values2.put("next", (count + 1));
 					db.update("NotifId", values2, null, null);
 				} else {
@@ -110,11 +121,18 @@ public class DownloadPage extends Activity {
 							getApplicationContext(),
 							"Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.",
 							Toast.LENGTH_LONG).show();
+					Intent stopIntent = new Intent(DownloadPage.this,
+							RecomendationService.class);
+					stopService(stopIntent);
+					Intent stopIntent1 = new Intent(DownloadPage.this,
+							TimerService.class);
+					stopService(stopIntent1);
 				}
 				db.close();
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
 						.parse(appEditorLinkList));
 				startActivity(browserIntent);
+				finish();
 
 			}
 		});
@@ -125,6 +143,7 @@ public class DownloadPage extends Activity {
 				// TODO Auto-generated method stub
 				textLink1.setClickable(false);
 				textLink2.setClickable(false);
+				textLink3.setClickable(false);
 
 				final Dialog dialog = new Dialog(DownloadPage.this);
 
@@ -161,7 +180,7 @@ public class DownloadPage extends Activity {
 						db.update("Survey", values,
 								"recommendationAppName = ?",
 								new String[] { whereDatabase });
-						if (count < 3) {
+						if (count < 8) {
 							values2.put("next", (count + 1));
 							db.update("NotifId", values2, null, null);
 						} else {
@@ -169,6 +188,12 @@ public class DownloadPage extends Activity {
 									getApplicationContext(),
 									"Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.",
 									Toast.LENGTH_LONG).show();
+							Intent stopIntent = new Intent(DownloadPage.this,
+									RecomendationService.class);
+							stopService(stopIntent);
+							Intent stopIntent1 = new Intent(DownloadPage.this,
+									TimerService.class);
+							stopService(stopIntent1);
 
 						}
 						int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;
@@ -208,6 +233,7 @@ public class DownloadPage extends Activity {
 						db.insertOrThrow("Survey2", null, value);
 						db.close();
 						dialog.dismiss();
+						finish();
 					}
 				});
 
@@ -221,10 +247,12 @@ public class DownloadPage extends Activity {
 						cv.put("next", (count - 1));
 						db.update("NotifId", cv, null, null);
 						db.close();
+						textLink1.setClickable(true);
+						textLink2.setClickable(true);
+						textLink3.setClickable(true);
 						dialog.dismiss();
 					}
 				});
-
 			}
 		});
 

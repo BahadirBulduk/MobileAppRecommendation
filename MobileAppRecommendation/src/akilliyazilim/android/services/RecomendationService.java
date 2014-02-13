@@ -38,7 +38,6 @@ public class RecomendationService extends Service {
 				RecomendationPage.class);
 		String androidId = Settings.Secure.getString(getContentResolver(),
 				Settings.Secure.ANDROID_ID);
-		/*** index düzenlemesi yapýlacak ***/
 		DatabaseHelper db_helper = new DatabaseHelper(getApplicationContext(), androidId+".db");
 		SQLiteDatabase db = db_helper.getReadableDatabase();
 		String query = "SELECT next FROM NotifId";
@@ -64,7 +63,6 @@ public class RecomendationService extends Service {
 
 		Notification n = new NotificationCompat.Builder(this)
 				.setContentTitle("Uygulama Önerisi" +(index+ 1))
-				// i+1 ile yer deðiþtirecek
 				.setContentText(Constants.appNameList[index])
 				.setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
 				.build();
