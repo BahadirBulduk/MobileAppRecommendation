@@ -1,6 +1,7 @@
 package akilliyazilim.android.mobileapprecommendation;
 
 import akilliyazilim.android.adapters.IknaTestiAdapter;
+import akilliyazilim.android.constants.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,16 +19,6 @@ public class SurveyFirstPage extends Activity {
 	private RadioButton radioButton;
 	private Button button;
 	TextView text;
-	String[] iknaTestiSorular = {
-			"Doktorumun tavsiyelerine kesinlikle uyarým.",
-			"Otoritelerin ve konunun uzmanlarýnýn görüþlerine çok deðer veririm.",
-			"Üstlerimin verdiði talimatlara her zaman uyarým.",
-			"Otoritelerin ve konunun uzmanlarýnýn görüþlerini arkadaþlarýmýn görüþlerinden daha çok dikkate alýrým",
-			"Baþkalarýnýn da ayný þeyi yaptýðýný biliyorsam, ayný þeyi yapmaya devam ederim.",
-			"Sosyal çevremden birisi bir kitabýn güzel olduðunu söylerse, o kitabý okumaya eðilimli olurum.",
-			"Yeni bir durumla karþýlaþtýðýmda karar verebilmek için diðerlerinin ne yaptýðýna bakarým.",
-			"Aykýrý düþmemek benim için önemlidir.",
-			"Ne yapacaðýmý belirlemek için çoðu kez diðerlerinin ne yaptýðýný dikkate alýrým." };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +31,8 @@ public class SurveyFirstPage extends Activity {
 		text = (TextView) findViewById(R.id.textbaslik);
 		text.setText("Ýkna Testi");
 
-		IknaTestiAdapter adapter = new IknaTestiAdapter(this, iknaTestiSorular);
+		IknaTestiAdapter adapter = new IknaTestiAdapter(this,
+				Constants.iknaTestiSorular);
 
 		listView.setAdapter(adapter);
 

@@ -1,6 +1,7 @@
 package akilliyazilim.android.mobileapprecommendation;
 
 import akilliyazilim.android.adapters.KisilikTestiAdapter;
+import akilliyazilim.android.constants.Constants;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,11 +18,7 @@ public class SurveySecondPage extends Activity {
 	private RadioGroup radioGroup;
 	private RadioButton radioButton;
 	private Button button;
-	String[] kisilikTesiSorular = { "Konuþkan",
-			"Baþkalarýnýn kusurlarýný bulmaya eðilimli", "Mükemmel iþ çýkaran",
-			"Depresif, hüzünlü", "Orjinal, yeni fikirler üreten", "Çekingen",
-			"Yardýmsever, bencil olmayan", "Biraz dikkatsiz",
-			"Rahat, stresle baþa çýkabilen" };
+
 	private TextView text;
 
 	@Override
@@ -43,7 +40,7 @@ public class SurveySecondPage extends Activity {
 				Toast.LENGTH_SHORT).show();
 
 		KisilikTestiAdapter adapter = new KisilikTestiAdapter(this,
-				kisilikTesiSorular);
+				Constants.kisilikTesiSorular);
 
 		listView.setAdapter(adapter);
 
