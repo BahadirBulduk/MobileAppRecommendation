@@ -20,16 +20,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class DownloadPage extends Activity {
 
-	Button textLink1, textLink2, textLink3;
+	Button textLink1, textLink2, textLink3, textLink4;
 	String whereDatabase;
 	SQLiteDatabase db;
 	ContentValues values, values2;
-	String appPopulerLinkList, appEditorLinkList;
+	String appPopulerLinkList, appEditorLinkList,appMostUsedLinkList;
 	String androidId;
 	int count;
 	DatabaseHelper database;
@@ -40,6 +41,8 @@ public class DownloadPage extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download);
+		TextView tv = (TextView)findViewById(R.id.textView1);
+		
 
 		androidId = Settings.Secure.getString(getContentResolver(),
 				Settings.Secure.ANDROID_ID);
@@ -51,16 +54,19 @@ public class DownloadPage extends Activity {
 		c.moveToFirst();
 		count = Integer.parseInt(c.getString(0));
 		whereDatabase = Constants.appNameList[count];
+		tv.setText(whereDatabase);
 		appPopulerLinkList = Constants.appPopulerLinkList[count];
 		appEditorLinkList = Constants.appEditorLinkList[count];
+		appMostUsedLinkList = Constants.appEditorLinkList[count];
 		count2 = count;
 		db.close();
 		values = new ContentValues();
 		values2 = new ContentValues();
-		textLink1 = (Button) findViewById(R.id.textLink1);
-		textLink2 = (Button) findViewById(R.id.textLink2);
-		textLink3 = (Button) findViewById(R.id.textLink3);
-
+		textLink1 = (Button) findViewById(R.id.textLink1);	//popüler uygulama linki.
+		textLink2 = (Button) findViewById(R.id.textLink2);	//editörün seçimi linki.
+		textLink3 = (Button) findViewById(R.id.textLink3);	//yüklemek istemiyorum butonu.
+		textLink4 = (Button) findViewById(R.id.textLink4); // En çok kullanýlan uygulamalar linki.
+		
 		// TextLink1--> appPopulerLinkList TextLink2-->appEditorLinkList
 		textLink1.setOnClickListener(new OnClickListener() {
 
@@ -70,9 +76,10 @@ public class DownloadPage extends Activity {
 				textLink1.setClickable(false);
 				textLink2.setClickable(false);
 				textLink3.setClickable(false);
+				textLink4.setClickable(false);
 
 				db = database.getWritableDatabase();
-				values.put("playLink", appPopulerLinkList);
+				values.put("playLink", appPopulerLinkList+"-populer uygulama");
 				db.update("Survey", values, "recommendationAppName = ?",
 						new String[] { whereDatabase });
 				if (count < 8) {
@@ -106,10 +113,11 @@ public class DownloadPage extends Activity {
 				textLink1.setClickable(false);
 				textLink2.setClickable(false);
 				textLink3.setClickable(false);
+				textLink4.setClickable(false);
 
 
 				db = database.getWritableDatabase();
-				values.put("playLink", appEditorLinkList);
+				values.put("playLink", appEditorLinkList+"-editorun secimi");
 				db.update("Survey", values, "recommendationAppName = ?",
 						new String[] { whereDatabase });
 				if (count < 8) {
@@ -143,6 +151,7 @@ public class DownloadPage extends Activity {
 				textLink1.setClickable(false);
 				textLink2.setClickable(false);
 				textLink3.setClickable(false);
+				textLink4.setClickable(false);
 
 				final Dialog dialog = new Dialog(DownloadPage.this);
 
@@ -249,11 +258,49 @@ public class DownloadPage extends Activity {
 						textLink1.setClickable(true);
 						textLink2.setClickable(true);
 						textLink3.setClickable(true);
+						textLink4.setClickable(true);
 						dialog.dismiss();
 					}
 				});
 			}
 		});
+		textLink4.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				textLink1.setClickable(false);
+				textLink2.setClickable(false);
+				textLink3.setClickable(false);
+				textLink4.setClickable(false);
 
+				db = database.getWritableDatabase();
+				values.put("playLink", appMostUsedLinkList+"-cok kullanilan uygulama");
+				db.update("Survey", values, "recommendationAppName = ?",
+						new String[] { whereDatabase });
+				if (count < 8) {
+					values2.put("next", (count + 1));
+					db.update("NotifId", values2, null, null);
+				} else {
+					Toast.makeText(
+							getApplicationContext(),
+							"Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.",
+							Toast.LENGTH_LONG).show();
+					Intent stopIntent = new Intent(DownloadPage.this,
+							RecomendationService.class);
+					stopService(stopIntent);
+					Intent stopIntent1 = new Intent(DownloadPage.this,
+							TimerService.class);
+					stopService(stopIntent1);
+				}
+				db.close();
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
+						.parse(appMostUsedLinkList));
+				startActivity(browserIntent);
+				finish();
+			}
+		});
+		
+	
 	}
 }
