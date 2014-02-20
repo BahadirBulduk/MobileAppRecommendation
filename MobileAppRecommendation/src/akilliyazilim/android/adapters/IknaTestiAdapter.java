@@ -2,20 +2,17 @@ package akilliyazilim.android.adapters;
 
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.mobileapprecommendation.R;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class IknaTestiAdapter extends BaseAdapter {
 
@@ -30,9 +27,9 @@ public class IknaTestiAdapter extends BaseAdapter {
 		// TODO Auto-generated constructor stub
 		this.sorular = sorular;
 		this.context = context;
-		id =Settings.Secure.getString(context.getContentResolver(),
+		id = Settings.Secure.getString(context.getContentResolver(),
 				Settings.Secure.ANDROID_ID);
-		dbHelper  = new DatabaseHelper(context, id+".db");
+		dbHelper = new DatabaseHelper(context, id + ".db");
 		db = dbHelper.getWritableDatabase();
 		mLayoutInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -66,7 +63,7 @@ public class IknaTestiAdapter extends BaseAdapter {
 			view = mLayoutInflater.inflate(R.layout.last_survey_first_page,
 					null);
 			holder.soru = (TextView) view.findViewById(R.id.soru);
-			holder.radioGroup = (RadioGroup) view.findViewById(R.id.cevaplar);
+			holder.spinner = (Spinner) view.findViewById(R.id.spinner1);
 			view.setTag(holder);
 
 		} else {
@@ -76,29 +73,22 @@ public class IknaTestiAdapter extends BaseAdapter {
 		String soru = sorular[pos];
 		holder.soru.setText(soru);
 
-		holder.radioGroup
-				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		holder.spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-					@Override
-					public void onCheckedChanged(RadioGroup group, int checkedId) {
-						// TODO Auto-generated method stub
-						int selectedId = holder.radioGroup
-								.getCheckedRadioButtonId();
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				// holder.spinner.getSelectedItem().toString()
+				// sorular[position]
+			}
 
-						holder.radioButton = (RadioButton) group
-								.findViewById(selectedId);
-						
-						//dbnin açýlmasýný kapanmasýný burda kontrol ettim.
-						//Kontrol edeceðin yerler soru ve cevap deðiþkenleri dogru mu?
-						db = dbHelper.getWritableDatabase();
-						ContentValues values = new ContentValues();
-						values.put("soru",  sorular[pos]);
-						values.put("cevap",holder.radioButton.getText().toString());
-						db.insertOrThrow("anket1", null, values);
-						db.close();
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
 
-					}
-				});
+			}
+		});
 
 		return view;
 	}
@@ -106,8 +96,7 @@ public class IknaTestiAdapter extends BaseAdapter {
 	private static class ViewHolder {
 
 		TextView soru;
-		RadioGroup radioGroup;
-		RadioButton radioButton;
+		Spinner spinner;
 
 	}
 

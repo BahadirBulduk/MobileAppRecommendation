@@ -28,7 +28,6 @@ public class SurveySecondPage extends Activity {
 		setContentView(R.layout.activity_main);
 
 		listView = (ListView) findViewById(R.id.listSorular);
-		radioGroup = (RadioGroup) listView.findViewById(R.id.cevaplar);
 		button = (Button) findViewById(R.id.btnNext);
 		button.setText("Bitir");
 		text = (TextView) findViewById(R.id.textbaslik);
