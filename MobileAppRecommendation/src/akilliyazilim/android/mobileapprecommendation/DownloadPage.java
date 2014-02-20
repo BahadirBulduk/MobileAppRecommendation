@@ -82,7 +82,7 @@ public class DownloadPage extends Activity {
 				values.put("playLink", appPopulerLinkList+"-populer uygulama");
 				db.update("Survey", values, "recommendationAppName = ?",
 						new String[] { whereDatabase });
-				if (count < 8) {
+				if (count < 9) {
 					values2.put("next", (count + 1));
 					db.update("NotifId", values2, null, null);
 				} else {
@@ -120,7 +120,7 @@ public class DownloadPage extends Activity {
 				values.put("playLink", appEditorLinkList+"-editorun secimi");
 				db.update("Survey", values, "recommendationAppName = ?",
 						new String[] { whereDatabase });
-				if (count < 8) {
+				if (count < 9) {
 					values2.put("next", (count + 1));
 					db.update("NotifId", values2, null, null);
 				} else {
@@ -188,7 +188,7 @@ public class DownloadPage extends Activity {
 						db.update("Survey", values,
 								"recommendationAppName = ?",
 								new String[] { whereDatabase });
-						if (count < 8) {
+						if (count < 9) {
 							values2.put("next", (count + 1));
 							db.update("NotifId", values2, null, null);
 						} else {
@@ -278,7 +278,7 @@ public class DownloadPage extends Activity {
 				values.put("playLink", appMostUsedLinkList+"-cok kullanilan uygulama");
 				db.update("Survey", values, "recommendationAppName = ?",
 						new String[] { whereDatabase });
-				if (count < 8) {
+				if (count < 9) {
 					values2.put("next", (count + 1));
 					db.update("NotifId", values2, null, null);
 				} else {

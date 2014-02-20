@@ -1,7 +1,12 @@
 package akilliyazilim.android.adapters;
 
+import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.mobileapprecommendation.R;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +22,18 @@ public class IknaTestiAdapter extends BaseAdapter {
 	String[] sorular;
 	private final LayoutInflater mLayoutInflater;
 	Context context;
+	DatabaseHelper dbHelper;
+	SQLiteDatabase db;
+	String id;
 
 	public IknaTestiAdapter(Context context, String[] sorular) {
 		// TODO Auto-generated constructor stub
 		this.sorular = sorular;
 		this.context = context;
+		id =Settings.Secure.getString(context.getContentResolver(),
+				Settings.Secure.ANDROID_ID);
+		dbHelper  = new DatabaseHelper(context, id+".db");
+		db = dbHelper.getWritableDatabase();
 		mLayoutInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -75,10 +87,15 @@ public class IknaTestiAdapter extends BaseAdapter {
 
 						holder.radioButton = (RadioButton) group
 								.findViewById(selectedId);
-
-						Toast.makeText(context,
-								holder.radioButton.getText() + " " + (pos + 1),
-								Toast.LENGTH_SHORT).show();
+						
+						//dbnin açýlmasýný kapanmasýný burda kontrol ettim.
+						//Kontrol edeceðin yerler soru ve cevap deðiþkenleri dogru mu?
+						db = dbHelper.getWritableDatabase();
+						ContentValues values = new ContentValues();
+						values.put("soru",  sorular[pos]);
+						values.put("cevap",holder.radioButton.getText().toString());
+						db.insertOrThrow("anket1", null, values);
+						db.close();
 
 					}
 				});

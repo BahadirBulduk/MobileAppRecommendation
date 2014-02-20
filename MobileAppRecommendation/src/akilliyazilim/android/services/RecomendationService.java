@@ -4,6 +4,7 @@ import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
 import akilliyazilim.android.mobileapprecommendation.R;
 import akilliyazilim.android.mobileapprecommendation.RecomendationPage;
+import akilliyazilim.android.mobileapprecommendation.SurveyFirstPage;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -34,38 +35,36 @@ public class RecomendationService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		Intent intentNotif = new Intent(getBaseContext(),
-				RecomendationPage.class);
+		
 		String androidId = Settings.Secure.getString(getContentResolver(),
 				Settings.Secure.ANDROID_ID);
 		DatabaseHelper db_helper = new DatabaseHelper(getApplicationContext(), androidId+".db");
 		SQLiteDatabase db = db_helper.getReadableDatabase();
 		String query = "SELECT next FROM NotifId";
 		Cursor c = db.rawQuery(query, null);
-	
 		c.moveToFirst();
 		Log.i("sadasdadasd", c.getString(0));
 		index =Integer.parseInt(c.getString(0));
-		
+		Intent intentNotif;
 		db.close();
-	
-		try {
-			Log.i("index",index +"--");
-			Log.i("appNameInfo",Constants.appInfoList[index]);
-		} catch (Exception e) {
-			// TODO: handle exception
+		if(index==8){
+			intentNotif = new Intent(getBaseContext(),
+					SurveyFirstPage.class);
+		}else{
+			intentNotif = new Intent(getBaseContext(),
+				RecomendationPage.class);
 		}
 	
-		intentNotif.putExtra("appName", Constants.appNameList[index]);
-		intentNotif.putExtra("appInfo", Constants.appInfoList[index]);
-		intentNotif.putExtra("appPopulerLinkList",
-				Constants.appPopulerLinkList[index]);
-		intentNotif.putExtra("appEditorLinkList",
-				Constants.appEditorLinkList[index]);
-		intentNotif.putExtra("appPopulerPackageList",
-				Constants.appPopulerPackageList[index]);
-		intentNotif.putExtra("appEditorPackageList",
-				Constants.appEditorPackageList[index]);
+//		intentNotif.putExtra("appName", Constants.appNameList[index]);
+//		intentNotif.putExtra("appInfo", Constants.appInfoList[index]);
+//		intentNotif.putExtra("appPopulerLinkList",
+//				Constants.appPopulerLinkList[index]);
+//		intentNotif.putExtra("appEditorLinkList",
+//				Constants.appEditorLinkList[index]);
+//		intentNotif.putExtra("appPopulerPackageList",
+//				Constants.appPopulerPackageList[index]);
+//		intentNotif.putExtra("appEditorPackageList",
+//				Constants.appEditorPackageList[index]);
 		Log.i("LOG", "RecomendationService");
 
 		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intentNotif,
