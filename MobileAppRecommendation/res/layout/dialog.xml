@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_weight="1"
-            android:text="SAVE" />
+            android:text="Kaydet" />
 
         <Button
             android:id="@+id/buttonCancelBlockKeyword"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_weight="1"
-            android:text="Cancel" />
+            android:text="Geri" />
     </LinearLayout>
 
 </LinearLayout>

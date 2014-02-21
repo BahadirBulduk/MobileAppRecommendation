@@ -50,8 +50,6 @@ public class MainActivity extends Activity {
 			startServiceRecom();
 			startServiceUpload();
 		}
-		Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
-		startService(service1);
 	}
 
 	private void initialize() {
