@@ -34,8 +34,11 @@
         <item>6</item>
         <item>Beğendim 7</item>
     </string-array>
+
     <string name="download_page_message">Benzer uygulamalar arasından sizin için seçilen öneriler aşağıda verilmektedir. Aşağıda verilen önerilerden birini tıklayınız.Bu sayede uygulamayı cep telefonunuza yükleyebilirsiniz.</string>
- <string-array name="lastsurvey1">
+
+    <string-array name="lastsurvey1">
+        <item>Lutfen Seciniz</item>
         <item>Tamamen Katılıyorum</item>
         <item>Katılıyorum</item>
         <item>Biraz Katılıyorum</item>
@@ -45,10 +48,12 @@
         <item>Hiç Katılmıyorum</item>
     </string-array>
     <string-array name="lastsurvey2">
+        <item>Lutfen Seciniz</item>
         <item>1 - Hiç Katılmıyorum</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
         <item>5 - Tamamen Katılıyorum</item>
     </string-array>
+
 </resources>
