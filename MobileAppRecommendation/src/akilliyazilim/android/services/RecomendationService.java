@@ -47,34 +47,32 @@ public class RecomendationService extends Service {
 		index =Integer.parseInt(c.getString(0));
 		Intent intentNotif;
 		db.close();
+		Notification n;
 		if(index==8){
 			intentNotif = new Intent(getBaseContext(),
 					SurveyFirstPage.class);
+			PendingIntent pIntent = PendingIntent.getActivity(this, 0, intentNotif,
+					0);
+
+			 n = new NotificationCompat.Builder(this)
+					.setContentTitle("Kiþilik ve Ýkna Testi")
+					.setContentText("Testi cözmek icin týklayýnýz")
+					.setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
+					.build();
 		}else{
 			intentNotif = new Intent(getBaseContext(),
 				RecomendationPage.class);
+			PendingIntent pIntent = PendingIntent.getActivity(this, 0, intentNotif,
+					0);
+
+			 n = new NotificationCompat.Builder(this)
+					.setContentTitle("Uygulama Önerisi" +(index+ 1))
+					.setContentText(Constants.appNameList[index])
+					.setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
+					.build();
 		}
 	
-//		intentNotif.putExtra("appName", Constants.appNameList[index]);
-//		intentNotif.putExtra("appInfo", Constants.appInfoList[index]);
-//		intentNotif.putExtra("appPopulerLinkList",
-//				Constants.appPopulerLinkList[index]);
-//		intentNotif.putExtra("appEditorLinkList",
-//				Constants.appEditorLinkList[index]);
-//		intentNotif.putExtra("appPopulerPackageList",
-//				Constants.appPopulerPackageList[index]);
-//		intentNotif.putExtra("appEditorPackageList",
-//				Constants.appEditorPackageList[index]);
-		Log.i("LOG", "RecomendationService");
-
-		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intentNotif,
-				0);
-
-		Notification n = new NotificationCompat.Builder(this)
-				.setContentTitle("Uygulama Önerisi" +(index+ 1))
-				.setContentText(Constants.appNameList[index])
-				.setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
-				.build();
+		
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		n.defaults |= Notification.DEFAULT_ALL;
 		n.flags |= Notification.FLAG_ONGOING_EVENT;

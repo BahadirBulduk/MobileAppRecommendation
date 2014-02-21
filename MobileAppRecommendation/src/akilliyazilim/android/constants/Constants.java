@@ -4,7 +4,7 @@ public class Constants {
 
 	public static String[] appNameList = { "Ses Kaydedici Uygulamasý",
 			"Hafýza Temizleyici", "Ýngilizce Türkçe Sözlük", "Bilgi Yarýþmasý",
-			"Ücretsiz Kitaplar", "Etkinlik Bul", "Koþu/Yürüme", "Verimlilik" };
+			"Ücretsiz Kitaplar", "Etkinlik Bul", "Koþu/Yürüme", "Verimlilik", "" };
 
 	public static String[] appInfoList = {
 			"Ses Kaydedici sesleri kaydetmek için kullanabilecek basit, eðlenceli ve kullanýmý kolay bir uygulamadýr. Bu uygulama ile derste anlatýlanlarý, sesli notlarýný, unutmaman gerekenleri, kutlama mesajlarýný, þarký, müzik veya görüþmelerini kolayca kaydedebilirsin. Ýçindeki 14 farklý ses efekti ile ses kayýtlarýný, perdesini ve hýzýný deðiþtirerek tekrar kaydedebilirsin. Yapmýþ olduðun kayýtlarý Dropbox, Google Drive gibi depolama hizmetleri ile buluta yükleyebilir ve istediðin zaman tekrar eriþebilirsin. ",

@@ -4,6 +4,7 @@ import java.io.File;
 
 import AppList.AppList;
 import akilliyazilim.android.Database.DatabaseHelper;
+import akilliyazilim.android.services.RecomendationService;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -24,7 +25,6 @@ public class MainActivity extends Activity {
 	public static DatabaseHelper database;
 	public static String androidId;
 	Button oneriButton;
-	EditText oneriText;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -35,8 +35,6 @@ public class MainActivity extends Activity {
 		StrictMode.setThreadPolicy(policy);
 		androidId = Settings.Secure.getString(getContentResolver(),
 				Settings.Secure.ANDROID_ID);
-		oneriButton = (Button)findViewById(R.id.oneriButton);
-		oneriText = (EditText)findViewById(R.id.oneriText);
 		File f = new File(getDatabasePath(androidId + ".db").toString());
 		if (!f.isFile()) {
 			database  = new DatabaseHelper(getApplicationContext(), androidId+".db");
@@ -46,27 +44,14 @@ public class MainActivity extends Activity {
 			db.insertOrThrow("NotifId", null, values);
 			database.close();
 			AppList a = new AppList(this, androidId);
+			Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
+			startService(service1);
 			initialize();
 			startServiceRecom();
 			startServiceUpload();
 		}
-		oneriButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				if(!oneriText.getText().toString().isEmpty()){
-					SQLiteDatabase db = database.getWritableDatabase();
-					ContentValues values = new ContentValues();
-					values.put("gorus", oneriText.getText().toString());
-					db.insertOrThrow("oneri", null, values);
-					database.close();
-				}else{
-					Toast.makeText(getApplicationContext(), "lutfen oncelikle gorus veya onerilerinizi yazýnýz", Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
-		
+		Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
+		startService(service1);
 	}
 
 	private void initialize() {

@@ -14,40 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
         android:text="@string/welcome_message"
         android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/oneriButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/oneriText"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/oneriText"
-        android:text="Gonder" />
-
-    <EditText
-        android:id="@+id/oneriText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/oneriButton"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView2"
-        android:ems="10"
-        android:hint="Öneri ve Görüşlerinizi bizlere iletebilirsiniz." >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:text="Oneri ve Gorüşlerinizi bize iletebilirsiniz"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

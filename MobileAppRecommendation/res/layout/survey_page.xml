@@ -17,7 +17,7 @@
         android:id="@+id/listSorular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnNext"
+        android:layout_above="@+id/oneriText"
         android:layout_below="@+id/textbaslik"
         android:divider="@null"
         android:dividerHeight="0dp" >
@@ -29,5 +29,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Devam Et!" />
+
+    <EditText
+        android:id="@+id/oneriText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnNext"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:hint="Öneri ve Görüşlerinizi bizlere iletebilirsiniz." />
 
 </RelativeLayout>

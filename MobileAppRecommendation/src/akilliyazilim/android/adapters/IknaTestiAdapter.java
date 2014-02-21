@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,7 @@ public class IknaTestiAdapter extends BaseAdapter {
 
 			holder = (ViewHolder) view.getTag();
 		}
+		
 		String soru = sorular[pos];
 		holder.soru.setText(soru);
 
@@ -88,6 +90,10 @@ public class IknaTestiAdapter extends BaseAdapter {
 				db.close();
 				// holder.spinner.getSelectedItem().toString()
 				// sorular[position]
+				Log.i("anket",sorular[pos]);
+				Log.i("anket",holder.spinner.getSelectedItem().toString());
+				
+
 			}
 
 			@Override

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,17 +20,18 @@ public class SurveyFirstPage extends Activity {
 	private RadioButton radioButton;
 	private Button button;
 	TextView text;
-
+	private EditText oneri;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.survey_page);
 
 		listView = (ListView) findViewById(R.id.listSorular);
 		button = (Button) findViewById(R.id.btnNext);
 		text = (TextView) findViewById(R.id.textbaslik);
 		text.setText("Ýkna Testi");
-
+		oneri = (EditText)findViewById(R.id.oneriText);
+		oneri.setVisibility(4);
 		IknaTestiAdapter adapter = new IknaTestiAdapter(this,
 				Constants.iknaTestiSorular);
 
