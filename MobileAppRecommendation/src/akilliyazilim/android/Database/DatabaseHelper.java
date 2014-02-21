@@ -27,8 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE Survey2 (id INTEGER PRIMARY KEY AUTOINCREMENT,TelId STRING,recommendationAppName STRING,benzer STRING,hafiza STRING,guvenlik STRING,pil STRING,begenmedi STRING,ilgi STRING,diger STRING)");
 		db.execSQL("CREATE TABLE NotifId (id INTEGER PRIMARY KEY AUTOINCREMENT,next INTEGER)");
 		db.execSQL("CREATE TABLE oneri (id INTEGER PRIMARY KEY AUTOINCREMENT,gorus STRING)");
-		db.execSQL("CREATE TABLE anket1 (id INTEGER PRIMARY KEY AUTOINCREMENT,soru STRING,cevap STRING)");
-		db.execSQL("CREATE TABLE anket2 (id INTEGER PRIMARY KEY AUTOINCREMENT,soru STRING,cevap STRING)");
+		db.execSQL("CREATE TABLE iknaAnket (id INTEGER PRIMARY KEY AUTOINCREMENT,soru STRING,cevap STRING)");
+		db.execSQL("CREATE TABLE kisilikAnket (id INTEGER PRIMARY KEY AUTOINCREMENT,soru STRING,cevap STRING)");
 	}
 	
 
@@ -43,8 +43,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXIST Survey2");
 		db.execSQL("DROP TABLE IF EXIST NotifId");
 		db.execSQL("DROP TABLE IF EXIST oneri");
-		db.execSQL("DROP TABLE IF EXIST anket1");
-		db.execSQL("DROP TABLE IF EXIST anket2");
+		db.execSQL("DROP TABLE IF EXIST iknaAnket");
+		db.execSQL("DROP TABLE IF EXIST kisilikAnket");
 		onCreate(db);
 	}
 

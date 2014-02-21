@@ -2,6 +2,7 @@ package akilliyazilim.android.adapters;
 
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.mobileapprecommendation.R;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.Settings;
@@ -29,8 +30,7 @@ public class KisilikTestiAdapter extends BaseAdapter {
 		id = Settings.Secure.getString(context.getContentResolver(),
 				Settings.Secure.ANDROID_ID);
 		dbHelper = new DatabaseHelper(context, id + ".db");
-		db = dbHelper.getWritableDatabase();
-		mLayoutInflater = (LayoutInflater) context
+				mLayoutInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
@@ -77,7 +77,12 @@ public class KisilikTestiAdapter extends BaseAdapter {
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				// TODO Auto-generated method stub
-
+				db = dbHelper.getWritableDatabase();
+				ContentValues values = new ContentValues();
+				values.put("soru", sorular[position]);
+				values.put("cevap", holder.spinner.getSelectedItem().toString());
+				db.insertOrThrow("kisilikAnket", null, values);
+				db.close();
 				// holder.spinner.getSelectedItem().toString()
 				// sorular[position]
 			}
@@ -85,7 +90,7 @@ public class KisilikTestiAdapter extends BaseAdapter {
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// TODO Auto-generated method stub
-
+				
 			}
 		});
 		return view;

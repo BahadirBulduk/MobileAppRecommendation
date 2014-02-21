@@ -2,6 +2,7 @@ package akilliyazilim.android.adapters;
 
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.mobileapprecommendation.R;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.Settings;
@@ -79,6 +80,12 @@ public class IknaTestiAdapter extends BaseAdapter {
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				// TODO Auto-generated method stub
+				db = dbHelper.getWritableDatabase();
+				ContentValues values = new ContentValues();
+				values.put("soru", sorular[pos]);
+				values.put("cevap", holder.spinner.getSelectedItem().toString());
+				db.insertOrThrow("iknaAnket", null, values);
+				db.close();
 				// holder.spinner.getSelectedItem().toString()
 				// sorular[position]
 			}
