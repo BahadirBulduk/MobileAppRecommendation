@@ -40,9 +40,7 @@ public class TimerService extends Service {
 
 		mCalendar.set(
 				Calendar.HOUR_OF_DAY,
-				Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-						+ (1 + ran.nextInt(5)));
-		Log.i("LOG", Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "");
+				Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
 		mCalendar.set(Calendar.MINUTE,
 				Calendar.getInstance().get(Calendar.MINUTE));
 		Log.i("LOG", Calendar.getInstance().get(Calendar.MINUTE) + "");
@@ -66,8 +64,7 @@ public class TimerService extends Service {
 		// pendingIntent);
 		// Inexact
 		alarmManager.setRepeating(AlarmManager.RTC,
-				mCalendar.getTimeInMillis(),
-				Constants.schedule[ran.nextInt(10)], pendingIntent);
+				mCalendar.getTimeInMillis(),300000, pendingIntent);
 
 		// alarmManager.setInexactRepeating(AlarmManager.RTC,
 		// mCalendar.getTimeInMillis(), 180000, pendingIntent);

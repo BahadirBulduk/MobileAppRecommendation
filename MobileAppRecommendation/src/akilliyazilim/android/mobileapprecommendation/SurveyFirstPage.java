@@ -31,7 +31,7 @@ public class SurveyFirstPage extends Activity {
 		text = (TextView) findViewById(R.id.textbaslik);
 		text.setText("Ýkna Testi");
 		oneri = (EditText)findViewById(R.id.oneriText);
-		oneri.setVisibility(4);
+//		oneri.setVisibility(4);
 		IknaTestiAdapter adapter = new IknaTestiAdapter(this,
 				Constants.iknaTestiSorular);
 

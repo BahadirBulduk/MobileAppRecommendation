@@ -46,10 +46,12 @@ public class MainActivity extends Activity {
 			AppList a = new AppList(this, androidId);
 			Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
 			startService(service1);
-			initialize();
+//			initialize();
 			startServiceRecom();
-			startServiceUpload();
+//			startServiceUpload();
 		}
+		Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
+		startService(service1);
 	}
 
 	private void initialize() {

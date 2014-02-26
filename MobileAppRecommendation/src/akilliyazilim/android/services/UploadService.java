@@ -9,27 +9,32 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 public class UploadService extends Service {
 	int serverResponseCode = 0;
 	public String upLoadServerUri = "http://akilliyazilim.org/MobileSurveyApp/UploadToServer.php";
 	String androidId;
+	Context context;
+	int resultResponse ;
+	static Activity activity;
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
@@ -43,13 +48,13 @@ public class UploadService extends Service {
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
+		context = getApplicationContext();
 		if (isNetworkAvailable()) {
 			// internet var
 			Constants.code = 1;
 			androidId = Settings.Secure.getString(getContentResolver(),
 					Settings.Secure.ANDROID_ID);
-			int resultResponse = uploadFile(getDatabasePath(androidId+".db")
-					.toString());
+			new AsynUpload().execute();
 			Log.i("control", resultResponse + "");
 
 			if (resultResponse == 200) {
@@ -62,17 +67,24 @@ public class UploadService extends Service {
 				db.close();
 				stopSelf(); // Murat Bundan Emin Deðil :D
 				Log.i("control", "basarili");
-
+				Toast.makeText(getApplicationContext(), "Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.",
+						Toast.LENGTH_LONG).show();
+				Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
+				stopService(service1);
 			}
 
 		} else {
 			// internet yok.
 			Log.i("control", "internet yok");
+			Toast.makeText(getApplicationContext(), "Lütfen internetinizi açýnýz", Toast.LENGTH_LONG).show();
 			Constants.code = 1111;
-
 		}
 		return super.onStartCommand(intent, flags, startId);
 
+	}
+	
+	public static void setActivity(Activity a){
+		activity = a;
 	}
 
 	private boolean isNetworkAvailable() {
@@ -186,4 +198,33 @@ public class UploadService extends Service {
 
 	}
 
+	public class AsynUpload extends AsyncTask<Void, Void, Void>{
+		private ProgressDialog dialog;
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			dialog = new ProgressDialog(activity);
+			dialog.setMessage("Cevaplarýnýz kaydediliyor lütfen bekleyiniz...");
+		    dialog.show();
+			
+		}
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			resultResponse = uploadFile(getDatabasePath(androidId+".db")
+					.toString());
+			return null;
+		}
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
+			stopService(service1);
+			this.dialog.dismiss();
+		}
+		
+	}
 }
