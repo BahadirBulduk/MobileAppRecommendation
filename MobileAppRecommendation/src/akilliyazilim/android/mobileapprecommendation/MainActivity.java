@@ -65,6 +65,7 @@ public class MainActivity extends Activity {
 					values.put("gorus", oneriText.getText().toString());
 					db.insertOrThrow("oneri", null, values);
 					database.close();
+					oneriText.setText("");
 					Toast.makeText(getApplicationContext(), "Öneriniz yollandý. Teþekkür ederiz", Toast.LENGTH_SHORT).show();
 				}else{
 					Toast.makeText(getApplicationContext(), "Önce önerinizi yazýnýz.", Toast.LENGTH_SHORT).show();

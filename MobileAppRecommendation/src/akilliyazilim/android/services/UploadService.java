@@ -12,6 +12,7 @@ import java.net.URL;
 
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
+import akilliyazilim.android.mobileapprecommendation.SurveySecondPage;
 import akilliyazilim.android.receiver.AlarmReceiver;
 import android.annotation.SuppressLint;
 import android.app.Activity;

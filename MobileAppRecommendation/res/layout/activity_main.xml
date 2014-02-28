@@ -17,16 +17,6 @@
         android:layout_alignRight="@+id/textView1"
         android:text="Oneri gonder" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/MainoneriText"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/welcome_message"
-        android:textSize="20sp" />
-
     <EditText
         android:id="@+id/MainoneriText"
         android:layout_width="wrap_content"
@@ -36,5 +26,14 @@
         android:layout_alignRight="@+id/textView1"
         android:ems="10"
         android:hint="Öneri ve Görüşlerinizi bizlere iletebilirsiniz." />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/welcome_message"
+        android:textSize="20sp" />
 
 </RelativeLayout>
