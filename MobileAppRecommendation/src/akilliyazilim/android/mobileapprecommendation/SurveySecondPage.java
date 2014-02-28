@@ -30,7 +30,7 @@ public class SurveySecondPage extends Activity {
 	private RadioGroup radioGroup;
 	private RadioButton radioButton;
 	private Button button;
-	private EditText oneri; 
+//	private EditText oneri; 
 	private TextView text;
 	DatabaseHelper database;
 	Activity a;
@@ -47,7 +47,7 @@ public class SurveySecondPage extends Activity {
 		button.setText("Bitir");
 		text = (TextView) findViewById(R.id.textbaslik);
 		text.setText("Kiþilik Testi");
-		oneri = (EditText)findViewById(R.id.oneriText);
+//		oneri = (EditText)findViewById(R.id.oneriText);
 		String androidId = Settings.Secure.getString(getContentResolver(),
 				Settings.Secure.ANDROID_ID);
 		database = new DatabaseHelper(getApplicationContext(), androidId+".db");
@@ -66,13 +66,7 @@ public class SurveySecondPage extends Activity {
 			@SuppressLint("NewApi") @Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(!oneri.getText().toString().isEmpty()){
-					SQLiteDatabase db = database.getWritableDatabase();
-					ContentValues values = new ContentValues();
-					values.put("gorus", oneri.getText().toString());
-					db.insertOrThrow("oneri", null, values);
-					database.close();
-				}
+
 				UploadService.setActivity(a);
 				
 				Intent service1 = new Intent(getApplicationContext(), UploadService.class);

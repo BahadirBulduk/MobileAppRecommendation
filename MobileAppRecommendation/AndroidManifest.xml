@@ -26,7 +26,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="akilliyazilim.android.mobileapprecommendation.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,9 +53,11 @@
         <receiver android:name="akilliyazilim.android.receiver.AlarmReceiver" >
         </receiver>
 
-        <activity android:name="akilliyazilim.android.mobileapprecommendation.DownloadPage" >
+        <activity android:name="akilliyazilim.android.mobileapprecommendation.DownloadPage"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="akilliyazilim.android.mobileapprecommendation.RecomendationPage" >
+        <activity android:name="akilliyazilim.android.mobileapprecommendation.RecomendationPage"
+            android:screenOrientation="portrait" >
         </activity>
 
         <receiver android:name="akilliyazilim.android.receiver.CheckApp" >
@@ -79,22 +82,24 @@
         <receiver android:name="akilliyazilim.android.receiver.UploadReceiver" >
         </receiver>
 
-        <service android:name="akilliyazilim.android.services.TimerUploadService" >
-        </service>
+<!--         <service android:name="akilliyazilim.android.services.TimerUploadService" > -->
+<!--         </service> -->
 
-        <receiver android:name="akilliyazilim.android.receiver.StartTimerUpload" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="Manual_Start_Upload" />
-            </intent-filter>
-        </receiver>
+<!--         <receiver android:name="akilliyazilim.android.receiver.StartTimerUpload" > -->
+<!--             <intent-filter> -->
+<!--                 <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
+<!--                 <action android:name="Manual_Start_Upload" /> -->
+<!--             </intent-filter> -->
+<!--         </receiver> -->
         <receiver android:name="akilliyazilim.android.receiver.InternetReceiver">
              <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <activity android:name="SurveyFirstPage"></activity>
-        <activity android:name="SurveySecondPage"></activity>
+        <activity android:name="SurveyFirstPage"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="SurveySecondPage"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ public class SurveyFirstPage extends Activity {
 	private RadioButton radioButton;
 	private Button button;
 	TextView text;
-	private EditText oneri;
+//	private EditText oneri;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,7 +30,7 @@ public class SurveyFirstPage extends Activity {
 		button = (Button) findViewById(R.id.btnNext);
 		text = (TextView) findViewById(R.id.textbaslik);
 		text.setText("Ýkna Testi");
-		oneri = (EditText)findViewById(R.id.oneriText);
+//		oneri = (EditText)findViewById(R.id.oneriText);
 //		oneri.setVisibility(4);
 		IknaTestiAdapter adapter = new IknaTestiAdapter(this,
 				Constants.iknaTestiSorular);

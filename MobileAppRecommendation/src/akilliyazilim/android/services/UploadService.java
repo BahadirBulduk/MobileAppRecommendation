@@ -12,14 +12,17 @@ import java.net.URL;
 
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
+import akilliyazilim.android.receiver.AlarmReceiver;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -35,8 +38,9 @@ public class UploadService extends Service {
 	public String upLoadServerUri = "http://akilliyazilim.org/MobileSurveyApp/UploadToServer.php";
 	String androidId;
 	Context context;
-	int resultResponse ;
+	int resultResponse;
 	static Activity activity;
+
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
@@ -61,29 +65,30 @@ public class UploadService extends Service {
 
 			if (resultResponse == 200) {
 				// iþlem basarýlý. tablolar sýfýrlandý. Servis durduruldu.
-				
-				DatabaseHelper database = new DatabaseHelper(getApplicationContext(), androidId+".db");
+
+				DatabaseHelper database = new DatabaseHelper(
+						getApplicationContext(), androidId + ".db");
 				SQLiteDatabase db = database.getWritableDatabase();
 				db.delete("CallLog", null, null);
 				db.delete("AppTracking", null, null);
 				db.close();
 				stopSelf(); // Murat Bundan Emin Deðil :D
 				Log.i("control", "basarili");
-				
-	
+
 			}
 
 		} else {
 			// internet yok.
 			Log.i("control", "internet yok");
-			Toast.makeText(getApplicationContext(), "Lütfen internetinizi açýnýz", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(),
+					"Lütfen internetinizi açýnýz", Toast.LENGTH_LONG).show();
 			Constants.code = 1111;
 		}
 		return super.onStartCommand(intent, flags, startId);
 
 	}
-	
-	public static void setActivity(Activity a){
+
+	public static void setActivity(Activity a) {
 		activity = a;
 	}
 
@@ -166,10 +171,9 @@ public class UploadService extends Service {
 				dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
 				// Serveerdan gelen response code
-				
 
 				serverResponseCode = conn.getResponseCode();
-Log.i("control", serverResponseCode+"");
+				Log.i("control", serverResponseCode + "");
 				String serverResponseMessage = conn.getResponseMessage();
 				Log.i("control", "basarili");
 				// stream kapanmalý // ?? exception olursa ?
@@ -198,7 +202,7 @@ Log.i("control", serverResponseCode+"");
 
 	}
 
-	public class AsynUpload extends AsyncTask<Void, Void, Void>{
+	public class AsynUpload extends AsyncTask<Void, Void, Void> {
 		private ProgressDialog dialog;
 
 		@Override
@@ -207,43 +211,62 @@ Log.i("control", serverResponseCode+"");
 			super.onPreExecute();
 			dialog = new ProgressDialog(activity);
 			dialog.setMessage("Cevaplarýnýz kaydediliyor lütfen bekleyiniz...");
-		    dialog.show();
-			
+			dialog.show();
+
 		}
+
 		@Override
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			resultResponse = uploadFile(getDatabasePath(androidId+".db")
+			resultResponse = uploadFile(getDatabasePath(androidId + ".db")
 					.toString());
 			return null;
 		}
+
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
+			Intent service1 = new Intent(getApplicationContext(),
+					RecomendationService.class);
 			stopService(service1);
 			dialog.dismiss();
-			Toast.makeText(getApplicationContext(), "Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.",
+			Toast.makeText(
+					getApplicationContext(),
+					"Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.",
 					Toast.LENGTH_LONG).show();
 
-			Intent service2 = new Intent(getApplicationContext(), TimerService.class);
+			Intent service2 = new Intent(getApplicationContext(),
+					TimerService.class);
 			stopService(service2);
-			Intent service3 = new Intent(getApplicationContext(), UploadService.class);
+			Intent service3 = new Intent(getApplicationContext(),
+					UploadService.class);
 			stopService(service3);
 
 			Context ctx = getApplicationContext();
 			/** */
-			AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
+			AlarmManager am = (AlarmManager) ctx
+					.getSystemService(Context.ALARM_SERVICE);
 			Intent cancelServiceIntent = new Intent(ctx, TimerService.class);
-			PendingIntent cancelServicePendingIntent = PendingIntent.getBroadcast(
-			    ctx,
-			    0, // integer constant used to identify the service
-			    cancelServiceIntent,
-			    0 //no FLAG needed for a service cancel
-			    );
-			am.cancel(cancelServicePendingIntent);		
+			PendingIntent cancelServicePendingIntent = PendingIntent
+					.getBroadcast(ctx, 0, // integer constant used to identify
+											// the service
+							cancelServiceIntent, 0 // no FLAG needed for a
+													// service cancel
+					);
+			am.cancel(cancelServicePendingIntent);
+			
+			 ComponentName receiver = new ComponentName(UploadService.this, AlarmReceiver.class);
+			     PackageManager pm = getPackageManager();
+			     pm.setComponentEnabledSetting(receiver,
+			             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+			             PackageManager.DONT_KILL_APP);
+
+//			System.gc();
+//			android.os.Process.killProcess(android.os.Process.myPid());
+//			System.exit(0);
+			
 		}
-		
+
 	}
 }

@@ -13,7 +13,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,6 +24,7 @@ public class MainActivity extends Activity {
 	public static DatabaseHelper database;
 	public static String androidId;
 	Button oneriButton;
+	EditText oneriText;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -36,6 +36,8 @@ public class MainActivity extends Activity {
 		androidId = Settings.Secure.getString(getContentResolver(),
 				Settings.Secure.ANDROID_ID);
 		File f = new File(getDatabasePath(androidId + ".db").toString());
+		oneriButton = (Button)findViewById(R.id.mainoneriButton);
+		oneriText = (EditText)findViewById(R.id.MainoneriText);
 		if (!f.isFile()) {
 			database  = new DatabaseHelper(getApplicationContext(), androidId+".db");
 			SQLiteDatabase db = database.getWritableDatabase();
@@ -52,6 +54,23 @@ public class MainActivity extends Activity {
 		}
 		Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
 		startService(service1);
+		oneriButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if(!oneriText.getText().toString().isEmpty()){
+					SQLiteDatabase db = database.getWritableDatabase();
+					ContentValues values = new ContentValues();
+					values.put("gorus", oneriText.getText().toString());
+					db.insertOrThrow("oneri", null, values);
+					database.close();
+					Toast.makeText(getApplicationContext(), "Öneriniz yollandý. Teþekkür ederiz", Toast.LENGTH_SHORT).show();
+				}else{
+					Toast.makeText(getApplicationContext(), "Önce önerinizi yazýnýz.", Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 	}
 
 	private void initialize() {
