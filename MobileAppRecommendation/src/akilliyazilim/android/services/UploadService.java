@@ -14,6 +14,8 @@ import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Context;
@@ -229,7 +231,18 @@ Log.i("control", serverResponseCode+"");
 			stopService(service2);
 			Intent service3 = new Intent(getApplicationContext(), UploadService.class);
 			stopService(service3);
-			
+
+			Context ctx = getApplicationContext();
+			/** */
+			AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
+			Intent cancelServiceIntent = new Intent(ctx, TimerService.class);
+			PendingIntent cancelServicePendingIntent = PendingIntent.getBroadcast(
+			    ctx,
+			    0, // integer constant used to identify the service
+			    cancelServiceIntent,
+			    0 //no FLAG needed for a service cancel
+			    );
+			am.cancel(cancelServicePendingIntent);		
 		}
 		
 	}

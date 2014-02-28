@@ -64,11 +64,17 @@ public class TimerService extends Service {
 		// pendingIntent);
 		// Inexact
 		alarmManager.setRepeating(AlarmManager.RTC,
-				mCalendar.getTimeInMillis(),300000, pendingIntent);
+				mCalendar.getTimeInMillis(),30000, pendingIntent);
 
 		// alarmManager.setInexactRepeating(AlarmManager.RTC,
 		// mCalendar.getTimeInMillis(), 180000, pendingIntent);
 
 		return super.onStartCommand(intent, flags, startId);
+	}
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
 	}
 }
