@@ -6,8 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="welcome_message">Merhaba,Bu çalışma kapsamında  sizlere mobil uygulamalar 
         tanıtılmakta ve bu kısa uygulama tanıtımlarını dikkate alarak değerlendirme yapmanız istenmektedir. 
-        Toplamda 8 uygulama değerlendirmenize sunulacaktır. Değerlendrmenize sunulacak uygulamalar belli zamanlarda
-         bildirim olarak düşecektir. Dolayısıyla uygulamayı açmanıza gerek yoktur. Katkılarınız için şimdiden teşekkürler..</string>
+        Toplamda 8 uygulama ve bir adet anket değerlendirmenize sunulacaktır. Değerlendrmenize sunulacak uygulamalar beş dakikalık aralıklarla bildirim olarak 
+        telefonunuza düşecektir. Katkılarınız için şimdiden teşekkürler..</string>
     <string name="anketmesaji">Bu uygulama için aşağıdaki ifadeleri okuyarak sizi en iyi ifade eden derecelendirme seçeneğini seçiniz</string>
 
     <string-array name="anket1">

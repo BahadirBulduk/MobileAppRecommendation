@@ -67,10 +67,8 @@ public class UploadService extends Service {
 				db.close();
 				stopSelf(); // Murat Bundan Emin Deðil :D
 				Log.i("control", "basarili");
-				Toast.makeText(getApplicationContext(), "Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.",
-						Toast.LENGTH_LONG).show();
-				Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
-				stopService(service1);
+				
+	
 			}
 
 		} else {
@@ -166,10 +164,10 @@ public class UploadService extends Service {
 				dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
 				// Serveerdan gelen response code
-				Log.i("control", "responsecode");
+				
 
 				serverResponseCode = conn.getResponseCode();
-
+Log.i("control", serverResponseCode+"");
 				String serverResponseMessage = conn.getResponseMessage();
 				Log.i("control", "basarili");
 				// stream kapanmalý // ?? exception olursa ?
@@ -223,7 +221,15 @@ public class UploadService extends Service {
 			super.onPostExecute(result);
 			Intent service1 = new Intent(getApplicationContext(), RecomendationService.class);
 			stopService(service1);
-			this.dialog.dismiss();
+			dialog.dismiss();
+			Toast.makeText(getApplicationContext(), "Deneyimiz burada bitmiþtir. Yardýmlarýnýz için teþekkür ederiz.",
+					Toast.LENGTH_LONG).show();
+
+			Intent service2 = new Intent(getApplicationContext(), TimerService.class);
+			stopService(service2);
+			Intent service3 = new Intent(getApplicationContext(), UploadService.class);
+			stopService(service3);
+			
 		}
 		
 	}
