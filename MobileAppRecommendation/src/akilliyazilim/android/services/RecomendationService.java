@@ -2,6 +2,7 @@ package akilliyazilim.android.services;
 
 import akilliyazilim.android.Database.DatabaseHelper;
 import akilliyazilim.android.constants.Constants;
+import akilliyazilim.android.mobileapprecommendation.LastSurveyInfoPage;
 import akilliyazilim.android.mobileapprecommendation.R;
 import akilliyazilim.android.mobileapprecommendation.RecomendationPage;
 import akilliyazilim.android.mobileapprecommendation.SurveyFirstPage;
@@ -50,7 +51,7 @@ public class RecomendationService extends Service {
 		Notification n;
 		if(index==8){
 			intentNotif = new Intent(getBaseContext(),
-					SurveyFirstPage.class);
+					LastSurveyInfoPage.class);
 			PendingIntent pIntent = PendingIntent.getActivity(this, 0, intentNotif,
 					0);
 

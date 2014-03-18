@@ -56,7 +56,20 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
-        <item>5 - Tamamen Katılıyorum</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7 - Tamamen Katılıyorum</item>
+    </string-array>
+    <string-array name="infosurvey1">
+        <item>Kadın</item>
+        <item>Erkek</item>
+    </string-array>
+    <string-array name="infosurvey2">
+        <item>İktisadi ve İdari Bilimler Fakültesi</item>
+        <item>Mühendislik Fakültesi</item>
+        <item>Fen Edebiyat Fakültesi</item>
+        <item>Mimarlık Fakültesi</item>
+        <item>Eğitim Fakültesi</item>
     </string-array>
 
 </resources>

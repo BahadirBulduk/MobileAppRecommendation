@@ -4,7 +4,8 @@ public class Constants {
 
 	public static String[] appNameList = { "Ses Kaydedici Uygulamasý",
 			"Hafýza Temizleyici", "Ýngilizce Türkçe Sözlük", "Bilgi Yarýþmasý",
-			"Ücretsiz Kitaplar", "Etkinlik Bul", "Koþu/Yürüme", "Verimlilik", "" };
+			"Ücretsiz Kitaplar", "Etkinlik Bul", "Koþu/Yürüme", "Verimlilik",
+			"" };
 
 	public static String[] appInfoList = {
 			"Ses Kaydedici sesleri kaydetmek için kullanabilecek basit, eðlenceli ve kullanýmý kolay bir uygulamadýr. Bu uygulama ile derste anlatýlanlarý, sesli notlarýný, unutmaman gerekenleri, kutlama mesajlarýný, þarký, müzik veya görüþmelerini kolayca kaydedebilirsin. Ýçindeki 14 farklý ses efekti ile ses kayýtlarýný, perdesini ve hýzýný deðiþtirerek tekrar kaydedebilirsin. Yapmýþ olduðun kayýtlarý Dropbox, Google Drive gibi depolama hizmetleri ile buluta yükleyebilir ve istediðin zaman tekrar eriþebilirsin. ",
@@ -53,15 +54,30 @@ public class Constants {
 	public static int code = 1;
 
 	public static String[] iknaTestiSorular = {
+			"Aile üyelerimden biri bana bir iyilik yaptýðý zaman, bu iyiliðin karþýlýðýný vermekte çok istekli olurum.",
+			"Yapýlan bir iyiliðin karþýlýðýný her zaman öderim.",
+			"Eðer birisi benim için bir iyilik yaptýysa, ayný deðerde birþey yaparak iyiliðin karþýlýðýný vermeye çalýþýrým.",
+			"Ýþimle ilgili bir konuda birinden yardým aldýðýmda, karþýlýðýný vermeye çalýþýrým.",
+			"Nadir  bulunan ürünlerin, çok bulunan ürünlere göre daha deðerli olduðuna inanýrým.",
+			"En sevdiðim maðaza kapanacaðý zaman, son þansým olacaðýný düþünerek  oraya uðramak isterim.",
+			"Eðer en son kalan ürünü ben alabildiysem, kendimi iyi hissederim.",
+			"Nadir bulunan ürünler özel bir deðer taþýr.",
 			"Doktorumun tavsiyelerine kesinlikle uyarým.",
 			"Otoritelerin ve konunun uzmanlarýnýn görüþlerine çok deðer veririm.",
-			"Üstlerimin verdiði talimatlara her zaman uyarým.",
-			"Otoritelerin ve konunun uzmanlarýnýn görüþlerini arkadaþlarýmýn görüþlerinden daha çok dikkate alýrým",
-			"Baþkalarýnýn da ayný þeyi yaptýðýný biliyorsam, ayný þeyi yapmaya devam ederim.",
-			"Sosyal çevremden birisi bir kitabýn güzel olduðunu söylerse, o kitabý okumaya eðilimli olurum.",
-			"Yeni bir durumla karþýlaþtýðýmda karar verebilmek için diðerlerinin ne yaptýðýna bakarým.",
-			"Aykýrý düþmemek benim için önemlidir.",
-			"Ne yapacaðýmý belirlemek için çoðu kez diðerlerinin ne yaptýðýný dikkate alýrým." };
+			"Üstlerimin verdiði talimatlara her zaman uyarým",
+			"Otoritelerin ya da konunun uzmanlarýnýn görüþlerini arkadaþlarýmýn görüþlerinden daha çok dikkate alýrým",
+			"Hocalarýmdan biri birþey söylediði zaman, söylediði þeyin doðru olduðuna inanýrým.",
+			"Yeni bir durumla karþýlaþtýðýmda karar verebilmek için diðerlerinin ne yaptýðýna bakarým",
+			"Ne yapacaðýmý belirlemek için çoðu kez diðerlerinin ne yaptýðýný dikkate alýrým. ",
+			"Aykýrý düþmemek benim için önemlidir",
+			"Baþkalarýn ayný þeyi yaptýðýný bildiðim sürece ben de onu yapmaya devam ederim",
+			"Sevdiðim insanlar için iyilik yaparým",
+			"Emin olmadýðým bir konuda genellikle sevdiðim insanlarýn fikrini benimserim",
+			"Arkadaþlarým ve yakýnlarýmdan tavsiye alýrým.",
+			"Sevdiðim insanlara inanmaya daha eðilimli/meyilli olurum",
+			"Bir randevuya söz verdiysem, her zaman randevuma sadýk kalýrým",
+			"Önceden söz vermiþ olduðum herþeyi yapmaya çalýþýrým",
+			"Birþeyi yapmayý kafama koyduysam kesinlikle yaparým" };
 
 	public static String[] kisilikTesiSorular = { "Konuþkan",
 			"Baþkalarýnýn kusurlarýný bulmaya eðilimli", "Mükemmel iþ çýkaran",
