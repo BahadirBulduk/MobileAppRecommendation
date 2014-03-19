@@ -32,7 +32,7 @@ public class SurveySecondPage extends Activity {
 	private Button button;
 //	private EditText oneri; 
 	private TextView text;
-	DatabaseHelper database;
+//	DatabaseHelper database;
 	Activity a;
 	Context context;
 	@Override
@@ -48,9 +48,9 @@ public class SurveySecondPage extends Activity {
 		text = (TextView) findViewById(R.id.textbaslik);
 		text.setText("Kiþilik Testi");
 //		oneri = (EditText)findViewById(R.id.oneriText);
-		String androidId = Settings.Secure.getString(getContentResolver(),
-				Settings.Secure.ANDROID_ID);
-		database = new DatabaseHelper(getApplicationContext(), androidId+".db");
+//		String androidId = Settings.Secure.getString(getContentResolver(),
+//				Settings.Secure.ANDROID_ID);
+//		database = new DatabaseHelper(getApplicationContext(), androidId+".db");
 		Toast.makeText(
 				getApplicationContext(),
 				"Ýfadelerin sizi tanýmlama düzeyýni dikkate alarak cevaplayýnýz",
@@ -71,11 +71,6 @@ public class SurveySecondPage extends Activity {
 				
 				Intent service1 = new Intent(getApplicationContext(), UploadService.class);
 				startService(service1);
-//					new AsynUpload().execute();
-					
-				// upload service çaðýrýlacak.. recom service durdurulacak.alarm durdurulacak.
-				
-				
 			}
 		});
 

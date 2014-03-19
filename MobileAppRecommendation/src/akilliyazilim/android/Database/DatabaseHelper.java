@@ -29,6 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE oneri (id INTEGER PRIMARY KEY AUTOINCREMENT,gorus STRING)");
 		db.execSQL("CREATE TABLE iknaAnket (id INTEGER PRIMARY KEY AUTOINCREMENT,soru STRING,cevap STRING)");
 		db.execSQL("CREATE TABLE kisilikAnket (id INTEGER PRIMARY KEY AUTOINCREMENT,soru STRING,cevap STRING)");
+		db.execSQL("CREATE TABLE cinsiyetbolum (id INTEGER PRIMARY KEY AUTOINCREMENT,cinsiyet STRING,bolum STRING)");
 	}
 	
 
@@ -45,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXIST oneri");
 		db.execSQL("DROP TABLE IF EXIST iknaAnket");
 		db.execSQL("DROP TABLE IF EXIST kisilikAnket");
+		db.execSQL("DROP TABLE IF EXIST cinsiyetbolum");
 		onCreate(db);
 	}
 
